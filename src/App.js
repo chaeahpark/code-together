@@ -1,22 +1,28 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBookmark,
-  faCommentDots,
-  faComments,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faComments, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   return (
     <div className="App">
       <header className="header">
         <h1 className="header__logo">CODE TOGETHER</h1>
-        <input className="header__search" type="text" placeholder="search" />
-        <div className="header__btn">
-          <button className="header__btn--post">POST</button>
-          <button className="header__btn--login">LOG IN</button>
+        <form className="header__form" action="">
+          <input
+            className="form__search"
+            type="text"
+            placeholder="Search..."
+          />
+          <button className="form__searchBtn" type="submit"><FontAwesomeIcon icon={faSearch}/></button>
+        </form>
+        <div className="header__btns">
+          <button className="header__btn" id="header__btn--post">
+            POST
+          </button>
+          <button className="header__btn" id="header__btn--login">
+            LOG IN
+          </button>
         </div>
       </header>
 
@@ -37,18 +43,26 @@ function App() {
             <p className="tag">#golang</p>
             <p className="tag">#typescript</p>
           </div>
-          <div className="sidebar__languages">
-
-          </div>
+          <div className="sidebar__languages"></div>
         </div>
         <div className="main__contents">
           <div className="contents__groupList">
             <div className="group__card">
-              <p className="group__title">We are looking for front-end and back-end</p>
+              <p className="group__title">
+                We are looking for front-end and back-end
+              </p>
               <div className="group__langs">
                 {/* add code language */}
-                <img className="group__lang" src={require("./img/js.png")} alt="javascript" />
-                <img className="group__lang" src={require("./img/react.png")} alt="react" />
+                <img
+                  className="group__lang"
+                  src={require("./img/js.png")}
+                  alt="javascript"
+                />
+                <img
+                  className="group__lang"
+                  src={require("./img/react.png")}
+                  alt="react"
+                />
               </div>
               <div className="group__icons">
                 <div className="group__icons--comments">
@@ -65,7 +79,11 @@ function App() {
               <p className="group__title">Are you interested in ux design</p>
               <div className="group__langs">
                 {/* add code language */}
-                <img className="group__lang" src={require("./img/js.png")} alt="javascript" />
+                <img
+                  className="group__lang"
+                  src={require("./img/js.png")}
+                  alt="javascript"
+                />
               </div>
               <div className="group__icons">
                 <div className="group__icons--comments">
@@ -82,7 +100,11 @@ function App() {
               <p className="group__title">Are you interested in ux design</p>
               <div className="group__langs">
                 {/* add code language */}
-                <img className="group__lang" src={require("./img/js.png")} alt="javascript" />
+                <img
+                  className="group__lang"
+                  src={require("./img/js.png")}
+                  alt="javascript"
+                />
               </div>
               <div className="group__icons">
                 <div className="group__icons--comments">
@@ -99,7 +121,11 @@ function App() {
               <p className="group__title">Are you interested in ux design</p>
               <div className="group__langs">
                 {/* add code language */}
-                <img className="group__lang" src={require("./img/js.png")} alt="javascript" />
+                <img
+                  className="group__lang"
+                  src={require("./img/js.png")}
+                  alt="javascript"
+                />
               </div>
               <div className="group__icons">
                 <div className="group__icons--comments">
