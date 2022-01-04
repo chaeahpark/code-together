@@ -24,6 +24,7 @@ function App() {
         <h2 className="banner__title">
           Find buddies and build projects together.
         </h2>
+        <img className="banner__img" src={require("./img/team.png")} alt="" />
       </div>
 
       <div className="main__container">
