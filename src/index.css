@@ -11,3 +11,83 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.App {
+  max-width: 990px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+  height: 200px;
+}
+
+.main__container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.main__sidebar {
+  background-color: greenyellow;
+  margin: 20px 0; 
+}
+
+.main__contents {
+
+}
+
+.contents__groupList {
+  display: flex; 
+  margin: 20px; 
+
+}
+
+.group__card {
+  border: 1px solid black;
+
+  width: 200px; 
+  height: 200px;
+  margin: 0 10px;
+  padding: 10px; 
+  
+
+  display: grid; 
+  grid-template-rows: 1 2 1;
+  
+}
+
+.group__lang {
+  width: auto; 
+  max-height: 40px; 
+}
+
+.group__icons {
+  display: flex; 
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.group__icons > div {
+  display: flex; 
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media screen and (max-width: 729px) {
+  
+}
+
+@media screen and (max-width: 480px) {
+  
+}
