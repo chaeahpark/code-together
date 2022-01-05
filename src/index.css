@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -17,15 +18,33 @@ code {
 }
 
 .App {
-  max-width: 990px;
+  width: 100vw;
+  /* 990px; */
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .header {
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.header__container {
+  width: 990px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.header__logo {
+  font-size: 20px;
 }
 
 .header__form {
@@ -63,13 +82,32 @@ code {
   margin-left: 10px;
 }
 
-.banner {
+.main {
+  width: 100vw; 
+  background-color: #efefef;
+  display: flex;
+  justify-content: center;
+}
+
+.main__container {
+  width: 990px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} 
+
+
+.main__banner {
   border: 1px solid green;
+  width: 100%;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  background-color: white;
 }
 
 .banner__img {
@@ -78,10 +116,10 @@ code {
   height: auto;
 }
 
-.main__container {
-  display: grid;
+.main__contents {
+  width: 100%; 
+  display: grid; 
   grid-template-columns: 20% 80%;
-  margin: 0 auto;
 }
 
 .main__sidebar {
@@ -89,23 +127,24 @@ code {
   margin: 20px 0;
 }
 
-.main__contents {}
 
 .contents__groupList {
+  width: 100%; 
   display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px auto;
 }
 
 .group__card {
-  border: 1px solid black;
-
-  width: 200px;
+ 
+  border-radius: 15px;
   height: 200px;
   margin: 0 10px;
   padding: 10px;
 
+  box-shadow: 5px 5px 20px 3px #dddddd;
+  background-color: white;
 
   display: grid;
   grid-template-rows: 1 2 1;
