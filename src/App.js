@@ -12,24 +12,29 @@ function App() {
     <div className="App">
       <header className="header">
         <div className="header__container">
-          <h1 className="header__logo">DEVAROUND</h1>
-          <form className="header__form" action="">
-            <input
-              className="form__search"
-              type="text"
-              placeholder="Search..."
-            />
-            <button className="form__searchBtn" type="submit">
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </form>
-          <div className="header__btns">
-            <button className="header__btn" id="header__btn--post">
-              POST
-            </button>
-            <button className="header__btn" id="header__btn--login">
-              LOG IN
-            </button>
+          <div className="header__left">
+            <h1 className="header__logo">DEVAROUND</h1>
+            <form className="header__form" action="">
+              <input
+                className="form__search"
+                type="text"
+                placeholder="Search..."
+              />
+              <button className="form__searchBtn" type="submit">
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+            </form>
+          </div>
+
+          <div className="header__right">
+            <div className="header__btns">
+              <button className="header__btn" id="header__btn--post">
+                POST
+              </button>
+              <button className="header__btn" id="header__btn--login">
+                LOG IN
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -50,17 +55,22 @@ function App() {
           <div className="main__contents">
             <div className="main__sidebar">
               <div className="sidebar__tags">
-                <p className="tag">#javascript</p>
-                <p className="tag">#python</p>
-                <p className="tag">#php</p>
-                <p className="tag">#java</p>
-                <p className="tag">#golang</p>
-                <p className="tag">#typescript</p>
+                <h3 className="main__title title--tag">Tags</h3>
+                <p className="tag__item">#javascript</p>
+                <p className="tag__item">#python</p>
+                <p className="tag__item">#php</p>
+                <p className="tag__item">#java</p>
+                <p className="tag__item">#golang</p>
+                <p className="tag__item">#typescript</p>
+                <p className="tag__item">#html</p>
+                <p className="tag__item">#css</p>
+                <p className="tag__item">c#</p>
               </div>
               <div className="sidebar__languages"></div>
             </div>
 
-            <div className="contents__groupList">
+            <div className="main__groupList">
+              <h3 className="main__title title--group">Recent projects</h3>
               <div className="group__card">
                 <div className="group__langs">
                   {/* add code language */}
