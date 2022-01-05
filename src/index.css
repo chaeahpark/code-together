@@ -120,6 +120,11 @@ code {
   border-radius: 10px;
 }
 
+.banner__title {
+font-size: 35px;
+text-align: center;
+}
+
 .banner__img {
   display: block;
   max-width: 400px;
@@ -155,7 +160,7 @@ code {
 
 .group__card {
   border-radius: 10px;
-  height: 200px;
+  height: auto;
   
   margin-bottom: 20px; 
 
@@ -173,6 +178,11 @@ code {
   width: auto;
   max-height: 30px;
   margin-right: 5px;
+}
+
+.group__title {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .group__icons {
