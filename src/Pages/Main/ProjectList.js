@@ -1,17 +1,15 @@
 import React from 'react'
-import GroupCard from './GroupCard'
+import ProjectCard from './ProjectCard'
 
-
-
-const GroupList = () => {
+const ProjectList = () => {
     return (
         <>
            <div className="main__groupList">
               <h3 className="main__title title--group">Recent projects</h3>
-              <GroupCard />
+              <ProjectCard />
             </div>  
         </>
     )
 }
 
-export default GroupList
+export default ProjectList

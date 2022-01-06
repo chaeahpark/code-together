@@ -1,7 +1,7 @@
 import React from "react";
-import Banner from "./Banner";
+import Banner from "../../Components/Banner";
 import Sidebar from "./Sidebar";
-import GroupList from "./GroupList";
+import ProjectList from "./ProjectList";
 
 const Main = () => {
   return (
@@ -11,7 +11,7 @@ const Main = () => {
           <Banner />
           <div className="main__contents">
             <Sidebar />
-            <GroupList />
+            <ProjectList />
           </div>
         </div>
       </div>

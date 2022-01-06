@@ -9,7 +9,7 @@ const Banner = () => {
             </h2>
             <img
               className="banner__img"
-              src={require("../img/team.png")}
+              src={require("../Assets/images/team.png")}
               alt="team"
             />
           </div>
