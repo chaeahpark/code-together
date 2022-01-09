@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "../../Components/Banner";
+import Banner from "../../components/Banner";
 import Sidebar from "./Sidebar";
 import ProjectList from "./ProjectList";
 
