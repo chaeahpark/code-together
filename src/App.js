@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 
 import ProjectProvider from "./contexts/ProjectContext";
+import AuthProvider from "./contexts/AuthContext";
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
         <Main />
         <Login />
       </ProjectProvider> */}
-      <Signup />
+      <AuthProvider>
+        <Signup />
+      </AuthProvider>
     </div>
   );
 }
