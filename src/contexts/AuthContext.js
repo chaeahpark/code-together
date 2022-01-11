@@ -41,6 +41,10 @@ const AuthProvider = ({ children }) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
+  const logout = () => {
+    auth.signOut();
+  };
+
   const setLoginError = (type, message) => {
     dispatch({ type, payload: message });
   };
@@ -61,6 +65,7 @@ const AuthProvider = ({ children }) => {
     signUpSuccess,
     setLoading,
     login,
+    logout,
     loginError: state.loginError,
     setLoginError,
   };
