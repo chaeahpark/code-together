@@ -1,8 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import Toast from "../../components/Toast";
 
 const Signup = () => {
-  const { signUp } = useAuth();
+  const {
+    user,
+    signUp,
+    signUpFail,
+    signupErrorMsg,
+    signUpSuccess,
+    setLoading,
+    loading,
+  } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -12,25 +21,31 @@ const Signup = () => {
 
     //validation
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return;
+      return signUpFail("Passwords do not match.");
     }
 
     try {
-      // 1. before sign up, sign up error should be an empty string.
-      // 2. dispatch and change the loading state to true
+      // set signUpError state to empty string
+      signUpFail("");
+      // change the loading state to true
+      setLoading(true);
       await signUp(emailRef.current.value, passwordRef.current.value);
     } catch {
       // dispatch action type SIGN_UP_FAIL
+      signUpFail("Failed to create an account.");
     }
-
     // set loading state to FALSE
+    setLoading(false);
   };
 
   return (
     <div className="form-page">
       <div className="form-container">
         <h2 className="form-title">Sign Up</h2>
-        <form className="form form-signup">
+        {signupErrorMsg && (
+          <p className="form-alert alert__error">{signupErrorMsg}</p>
+        )}
+        <form className="form form-signup" onSubmit={handleSubmit}>
           <div className="input-container">
             <label htmlFor="email" className="input-label">
               Email:
@@ -49,7 +64,12 @@ const Signup = () => {
             </label>
             <input type="text" placeholder="" ref={passwordConfirmRef} />
           </div>
-          <button className="form-btn" type="submit" value="submit">
+          <button
+            disabled={loading}
+            className="form-btn"
+            type="submit"
+            value="submit"
+          >
             Sign Up
           </button>
         </form>
