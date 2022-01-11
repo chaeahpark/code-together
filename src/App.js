@@ -7,17 +7,23 @@ import Signup from "./pages/signup/Signup";
 import ProjectProvider from "./contexts/ProjectContext";
 import AuthProvider from "./contexts/AuthContext";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
-      {/* <ProjectProvider>
-        <Header />
-        <Main />
-        <Login />
-      </ProjectProvider> */}
-      <AuthProvider>
-        <Signup />
-      </AuthProvider>
+      <Router>
+        <AuthProvider>
+          <ProjectProvider>
+            <Header />
+            <Routes>
+              <Route exact path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </ProjectProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
