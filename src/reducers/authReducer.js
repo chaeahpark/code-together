@@ -3,6 +3,8 @@ import {
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
   SWITCH_LOADING_STATUS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
 } from "./types";
 
 export const authInitialState = {
@@ -24,6 +26,10 @@ export const authReducer = (state, action) => {
       return { ...state, user: payload };
     case SWITCH_LOADING_STATUS:
       return { ...state, loading: payload };
+    case LOGIN_SUCCESS:
+      return { ...state, loginError: payload };
+    case LOGIN_FAIL:
+      return { ...state, loginError: payload };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import Toast from "../../components/Toast";
 
 const Signup = () => {
   const {
@@ -15,6 +15,7 @@ const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,16 +26,15 @@ const Signup = () => {
     }
 
     try {
-      // set signUpError state to empty string
       signUpFail("");
-      // change the loading state to true
       setLoading(true);
       await signUp(emailRef.current.value, passwordRef.current.value);
-    } catch {
-      // dispatch action type SIGN_UP_FAIL
+
+      navigate("/", { replace: true });
+    } catch (e) {
       signUpFail("Failed to create an account.");
     }
-    // set loading state to FALSE
+
     setLoading(false);
   };
 
@@ -74,8 +74,9 @@ const Signup = () => {
           </button>
         </form>
       </div>
-      {/* ADD A LINK ON LOGIN */}
-      <p>Already have an account? Login</p>
+      <p>
+        Already have an account? <Link to="/login">Log In</Link>
+      </p>
     </div>
   );
 };

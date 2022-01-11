@@ -6,6 +6,8 @@ import {
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
   SWITCH_LOADING_STATUS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
 } from "../reducers/types";
 
 const AuthContext = createContext();
@@ -35,6 +37,14 @@ const AuthProvider = ({ children }) => {
     dispatch({ type: SIGNUP_SUCCESS, payload: user });
   };
 
+  const login = (email, password) => {
+    return auth.signInWithEmailAndPassword(email, password);
+  };
+
+  const setLoginError = (type, message) => {
+    dispatch({ type, payload: message });
+  };
+
   const setLoading = (status) => {
     dispatch({
       type: SWITCH_LOADING_STATUS,
@@ -50,6 +60,9 @@ const AuthProvider = ({ children }) => {
     signUpFail,
     signUpSuccess,
     setLoading,
+    login,
+    loginError: state.loginError,
+    setLoginError,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
