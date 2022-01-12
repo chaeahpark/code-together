@@ -1,14 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Searchbar from "./Searchbar";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
   const renderBtnText = () => {
     if (user && user.email) {
       return "Log Out";
     }
     return "Log In";
+  };
+
+  const handleBtnClick = () => {
+    if (user && user.email) {
+      logout();
+    } else {
+      navigate("login");
+    }
   };
 
   return (
@@ -22,7 +33,11 @@ const Header = () => {
 
           <div className="header__right">
             <div className="header__btns">
-              <button className="header__btn" id="header__btn--login">
+              <button
+                className="header__btn"
+                id="header__btn--login"
+                onClick={handleBtnClick}
+              >
                 {renderBtnText()}
               </button>
               <button className="header__btn" id="header__btn--createAccount">
