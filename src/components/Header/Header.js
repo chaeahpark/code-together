@@ -1,7 +1,16 @@
 import React from "react";
 import Searchbar from "./Searchbar";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Header = () => {
+  const { user } = useAuth();
+  const renderBtnText = () => {
+    if (user && user.email) {
+      return "Log Out";
+    }
+    return "Log In";
+  };
+
   return (
     <>
       <header className="header">
@@ -14,7 +23,7 @@ const Header = () => {
           <div className="header__right">
             <div className="header__btns">
               <button className="header__btn" id="header__btn--login">
-                Log in
+                {renderBtnText()}
               </button>
               <button className="header__btn" id="header__btn--createAccount">
                 Create account
