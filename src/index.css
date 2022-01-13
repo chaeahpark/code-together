@@ -104,18 +104,18 @@ code {
 }
 
 .header__avatar {
-  position: relative;
+  position: relative; /* relative for profile dropdown */
 }
 
-.header__avatar:hover {
+.sb-avatar:hover {
   cursor: pointer;
 }
 
 /* PROFILE DROPDOWN */
 .profileDropdown__container {
   position: absolute; /*relative to header__avatar*/
-  top: 50px;
-  right: 20px;
+  top: 40px;
+  right: 10px;
 
   border: 1px var(--border-color) solid;
   border-radius: 5px;

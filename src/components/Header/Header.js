@@ -45,9 +45,12 @@ const Header = () => {
       );
   };
 
+  const handleProfileClick = () => {
+    changeToggle(!toggle);
+  };
+
   return (
     <>
-      {console.log("toggle", toggle)}
       <header className="header">
         <div className="header__container">
           <div className="header__left">
@@ -68,18 +71,13 @@ const Header = () => {
                 Create account
               </button>
             </div>
-            <div
-              className="header__avatar"
-              onMouseEnter={() => {
-                console.log("Mouse");
-              }}
-            >
+            <div className="header__avatar" onClick={handleProfileClick}>
               {renderAvatar()}
+              {toggle ? <ProfileDropdown /> : null}
             </div>
           </div>
         </div>
       </header>
-      <ProfileDropdown />
     </>
   );
 };
