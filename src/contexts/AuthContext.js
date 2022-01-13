@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    auth.signOut();
+    return auth.signOut();
   };
 
   const setLoginError = (type, message) => {

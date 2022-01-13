@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Searchbar from "./Searchbar";
+import Avatar from "react-avatar";
 import { useAuth } from "../../contexts/AuthContext";
+import Searchbar from "./Searchbar";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -14,12 +15,29 @@ const Header = () => {
     return "Log In";
   };
 
-  const handleBtnClick = () => {
+  const handleBtnClick = async () => {
     if (user && user.email) {
-      logout();
+      try {
+        await logout();
+        navigate("/login");
+      } catch (e) {
+        throw Error(e);
+      }
     } else {
       navigate("login");
     }
+  };
+
+  const renderAvatar = () => {
+    if (user && user.email)
+      return (
+        <Avatar
+          name={user.email.slice(0, 1)}
+          email={user.email}
+          size="35"
+          round={true}
+        />
+      );
   };
 
   return (
@@ -43,6 +61,14 @@ const Header = () => {
               <button className="header__btn" id="header__btn--createAccount">
                 Create account
               </button>
+            </div>
+            <div
+              className="header__avatar"
+              onMouseEnter={() => {
+                console.log("Mouse");
+              }}
+            >
+              {renderAvatar()}
             </div>
           </div>
         </div>

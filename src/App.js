@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./components/Header/Header";
+import ProfileDropdown from "./components/ProfileDropdown";
 import Main from "./pages/main/Main";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
@@ -16,6 +17,7 @@ function App() {
         <AuthProvider>
           <ProjectProvider>
             <Header />
+            <ProfileDropdown />
             <Routes>
               <Route exact path="/" element={<Main />} />
               <Route path="/login" element={<Login />} />

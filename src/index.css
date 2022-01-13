@@ -2,7 +2,7 @@
   --bg-color: #efefef;
   --btn-hover-color: #e1dfff;
   --form-btn-color: #e1dfff;
-  --form-border-color: #d6d6d7;
+  --border-color: #d6d6d7;
   --btn-disabled-color: #d6d6d7;
   --alert-text-color-danger: #800000;
   --alert-background-color-danger: #ffb2ae;
@@ -78,6 +78,13 @@ code {
   cursor: pointer;
 }
 
+.header__right {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .header__btn {
   text-decoration: none;
   font-weight: bold;
@@ -93,6 +100,45 @@ code {
 
 #header__btn--createAccount {
   margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header__avatar {
+  position: relative;
+}
+
+.header__avatar:hover {
+  cursor: pointer;
+}
+
+/* PROFILE DROPDOWN */
+.profileDropdown__container {
+  position: absolute; /*relative to header__avatar*/
+  top: 50px;
+  right: 20px;
+
+  border: 1px var(--border-color) solid;
+  border-radius: 5px;
+  width: 250px;
+  height: auto;
+
+  background-color: white;
+}
+
+.profileDropdown__list {
+  padding: 5px;
+}
+
+.profileList__item {
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.profileList__item:hover {
+  background-color: var(--btn-hover-color);
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
 }
 
 .main {
@@ -215,7 +261,7 @@ code {
 
 .form-container {
   width: 50vw;
-  border: 1px solid var(--form-border-color);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 30px;
 
@@ -240,7 +286,7 @@ code {
 
 .input-container > input,
 .form-alert.alert__error {
-  border: 1px solid var(--form-border-color);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 15px;
   padding: 5px;
