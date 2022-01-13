@@ -11,3 +11,5 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const SWITCH_LOADING_STATUS = "SWITCH_LOADING_STATUS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+
+export const SWITCH_TOGGLE = "SWITCH_TOGGLE";

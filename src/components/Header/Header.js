@@ -1,12 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "react-avatar";
-import { useAuth } from "../../contexts/AuthContext";
 import Searchbar from "./Searchbar";
+import ProfileDropdown from "../ProfileDropdown";
+
+import { useAuth } from "../../contexts/AuthContext";
+import { useProfile } from "../../contexts/ProfileContext";
+
+import Avatar from "react-avatar";
 
 const Header = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { toggle, changeToggle } = useProfile();
 
   const renderBtnText = () => {
     if (user && user.email) {
@@ -42,6 +47,7 @@ const Header = () => {
 
   return (
     <>
+      {console.log("toggle", toggle)}
       <header className="header">
         <div className="header__container">
           <div className="header__left">
@@ -73,6 +79,7 @@ const Header = () => {
           </div>
         </div>
       </header>
+      <ProfileDropdown />
     </>
   );
 };
