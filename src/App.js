@@ -4,6 +4,7 @@ import ProfileDropdown from "./components/ProfileDropdown";
 import Main from "./pages/main/Main";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
+import WritePost from "./pages/writePost/WritePost";
 
 import ProjectProvider from "./contexts/ProjectContext";
 import ProfileProvider from "./contexts/ProfileContext";
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path="/" element={<Main />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/writepost" element={<WritePost />}></Route>
               </Routes>
             </ProjectProvider>
           </ProfileProvider>
