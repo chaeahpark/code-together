@@ -20,7 +20,6 @@ function App() {
           <ProfileProvider>
             <ProjectProvider>
               <Header />
-
               <Routes>
                 <Route exact path="/" element={<Main />} />
                 <Route path="/login" element={<Login />} />
