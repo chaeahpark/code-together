@@ -8,6 +8,7 @@ import AddPost from "./pages/AddPost";
 import ProjectProvider from "./contexts/ProjectContext";
 import ProfileProvider from "./contexts/ProfileContext";
 import AuthProvider from "./contexts/AuthContext";
+import TagProvider from "./contexts/TagContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,13 +19,15 @@ function App() {
         <AuthProvider>
           <ProfileProvider>
             <ProjectProvider>
-              <Header />
-              <Routes>
-                <Route exact path="/" element={<Main />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/addPost" element={<AddPost />}></Route>
-              </Routes>
+              <TagProvider>
+                <Header />
+                <Routes>
+                  <Route exact path="/" element={<Main />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/addPost" element={<AddPost />}></Route>
+                </Routes>
+              </TagProvider>
             </ProjectProvider>
           </ProfileProvider>
         </AuthProvider>
