@@ -1,4 +1,8 @@
 import { useRef, useEffect } from "react";
+
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+
 import { useTag } from "../contexts/TagContext";
 
 const Tags = () => {
@@ -13,27 +17,24 @@ const Tags = () => {
     selectedTags,
   } = useTag();
 
-  const tagInput = useRef(null);
-
-  const renderTagList = () => {
-    if (display) {
-      return options.map((option) => {
-        return <div key={options.indexOf(option)}>{option}</div>;
-      });
-    } else if (display && searchTerm) {
-      return console.log("onSearch");
-    }
-  };
-
   return (
-    <div className="tag-wrapper" ref={tagInput}>
-      <input
-        type="text"
-        onFocus={displayOn}
-        onBlur={displayOff}
-        placeholder="Select upto 4 tags..."
+    <div className="tag-wrapper">
+      <Autocomplete
+        multiple
+        id="tags-standard"
+        options={options}
+        onChange={(e, value) => {
+          console.log("value", value);
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="standard"
+            label="What do you mainly use for the project?"
+            placeholder="Select tags..."
+          />
+        )}
       />
-      {renderTagList()}
     </div>
   );
 };

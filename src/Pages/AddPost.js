@@ -6,8 +6,8 @@ import { useTag } from "../contexts/TagContext";
 
 const AddPost = () => {
   return (
-    <>
-      <div className="textEditor-container">
+    <div className="addPost-container">
+      <div className="addPost-wrapper">
         {/* ----- Post Title ----- */}
         <div className="textEditor-title">
           <input
@@ -19,7 +19,7 @@ const AddPost = () => {
         <Tags />
         <TextEditor />
       </div>
-    </>
+    </div>
   );
 };
 
