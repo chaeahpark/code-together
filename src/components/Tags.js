@@ -4,18 +4,11 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
 import { useTag } from "../contexts/TagContext";
+import { useProjects } from "../contexts/ProjectContext";
 
 const Tags = () => {
-  const {
-    display,
-    options,
-    searchTerm,
-    displayOn,
-    displayOff,
-    addTag,
-    deleteTag,
-    selectedTags,
-  } = useTag();
+  const { options } = useTag();
+  const { setTags } = useProjects();
 
   return (
     <div className="tag-wrapper">
@@ -24,7 +17,7 @@ const Tags = () => {
         id="tags-standard"
         options={options}
         onChange={(e, value) => {
-          console.log("value", value);
+          setTags(value);
         }}
         renderInput={(params) => (
           <TextField

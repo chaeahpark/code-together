@@ -1,19 +1,55 @@
 import { createContext, useReducer, useContext } from "react";
 import { initialState, projectReducer } from "../reducers/projectReducer";
-import { GET_PROJECT } from "../reducers/types";
+import {
+  GET_PROJECT,
+  SET_TITLE,
+  SET_CONTENT,
+  SET_TAGS,
+  SET_USERID,
+} from "../reducers/types";
+import { useAuth } from "./AuthContext";
 
 const ProjectContext = createContext(initialState);
 
 const ProjectProvider = ({ children }) => {
   const [state, dispatch] = useReducer(projectReducer, initialState);
+  const { user } = useAuth();
 
   const getProject = () => {
     dispatch({ type: GET_PROJECT });
   };
 
+  const setTitle = (title) => {
+    dispatch({ type: SET_TITLE, payload: title });
+  };
+
+  const setContent = (content) => {
+    dispatch({ type: SET_CONTENT, payload: content });
+  };
+
+  const setTags = (tags) => {
+    dispatch({ type: SET_TAGS, payload: tags });
+  };
+
+  const setUserId = () => {
+    if (user && user.email) {
+      dispatch({ type: SET_USERID, payload: user.uid });
+    }
+  };
+
   const value = {
-    projects: state.projects,
-    getProject: getProject,
+    projectList: state.projectList,
+    postTitle: state.currentProject.title,
+    postContent: state.currentProject.content,
+    postTags: state.currentProject.tags,
+    postWriter: state.currentProject.userId,
+    postSaved: state.currentProject.saved,
+    postCreatedAt: state.currentProject.createdAt,
+    getProject,
+    setTitle,
+    setContent,
+    setTags,
+    setUserId,
   };
 
   return (

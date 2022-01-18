@@ -3,6 +3,11 @@ export const ADD_PROJECT = "ADD_PROJECT";
 export const UPDATE_PROJECT = "UPDATE_PROJECT";
 export const REMOVE_PROJECT = "REMOVE_PROJECT";
 export const GET_PROJECT = "GET_PROJECT";
+export const SET_TITLE = "SET_TITLE";
+export const SET_CONTENT = "SET_CONTENT";
+export const SET_TAGS = "SET_TAGS";
+export const SET_USERID = "SET_USERID";
+export const SET_CREATEDAT = "SET_CREATEDAT";
 
 // VARIABLES FOR AUTH REDUCER
 export const GET_CURRENT_USER = "GET_CURRENT_USER";

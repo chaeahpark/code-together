@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
     // check the user status when tha app is loaded
     const unsubscribe = auth.onAuthStateChanged((user) => {
       dispatch({ type: GET_CURRENT_USER, payload: user });
+
       setLoading(false);
     });
 

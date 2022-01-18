@@ -4,13 +4,15 @@ import { useProjects } from "../../contexts/ProjectContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark, faComments } from "@fortawesome/free-solid-svg-icons";
 
-const ProjectCard = () => {
-  const { projects } = useProjects();
-  console.log("projects list", projects);
+// !state changed in PROJECT CONTEXT so make sure to change project.xxx
+// !to appropriate form
 
-  const renderCards = projects.map((project) => {
+const ProjectCard = () => {
+  const { projectList } = useProjects();
+
+  const renderCards = projectList.map((project) => {
     return (
-      <div className="group__card" key={project.id}>
+      <div className="group__card" key={project.postId}>
         <div className="group__langs">
           <img
             className="group__lang"
@@ -24,6 +26,7 @@ const ProjectCard = () => {
           />
         </div>
         <p className="group__title">{project.title}</p>
+        <p className="group__writer">written by {project.writerEmail}</p>
         <div className="group__icons">
           <div className="group__icons--comments">
             <FontAwesomeIcon icon={faComments} />
