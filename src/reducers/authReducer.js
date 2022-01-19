@@ -5,6 +5,7 @@ import {
   SWITCH_LOADING_STATUS,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  SET_USERID,
 } from "./types";
 
 export const authInitialState = {
@@ -20,6 +21,7 @@ export const authReducer = (state, action) => {
   switch (type) {
     case GET_CURRENT_USER:
       return { ...state, user: payload };
+
     case SIGNUP_FAIL:
       return { ...state, signupError: payload };
     case SIGNUP_SUCCESS:

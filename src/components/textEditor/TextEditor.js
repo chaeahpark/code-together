@@ -17,7 +17,7 @@ const TextEditor = () => {
   useEffect(() => {
     if (quill) {
       quill.on("text-change", (delta, oldDelta, source) => {
-        const quillDelta = quill.getContents();
+        const quillDelta = quill.getContents().ops;
         setContent(quillDelta);
       });
     }

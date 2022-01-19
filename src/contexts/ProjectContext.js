@@ -31,12 +31,6 @@ const ProjectProvider = ({ children }) => {
     dispatch({ type: SET_TAGS, payload: tags });
   };
 
-  const setUserId = () => {
-    if (user && user.email) {
-      dispatch({ type: SET_USERID, payload: user.uid });
-    }
-  };
-
   const value = {
     projectList: state.projectList,
     postTitle: state.currentProject.title,
@@ -49,7 +43,6 @@ const ProjectProvider = ({ children }) => {
     setTitle,
     setContent,
     setTags,
-    setUserId,
   };
 
   return (

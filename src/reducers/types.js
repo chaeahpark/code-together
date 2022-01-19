@@ -6,7 +6,7 @@ export const GET_PROJECT = "GET_PROJECT";
 export const SET_TITLE = "SET_TITLE";
 export const SET_CONTENT = "SET_CONTENT";
 export const SET_TAGS = "SET_TAGS";
-export const SET_USERID = "SET_USERID";
+
 export const SET_CREATEDAT = "SET_CREATEDAT";
 
 // VARIABLES FOR AUTH REDUCER
@@ -16,6 +16,7 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const SWITCH_LOADING_STATUS = "SWITCH_LOADING_STATUS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+export const SET_USERID = "SET_USERID";
 
 // VARIABLES FOR PROFILE REDUCER
 export const SWITCH_TOGGLE = "SWITCH_TOGGLE";

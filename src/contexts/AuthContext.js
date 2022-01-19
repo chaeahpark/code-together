@@ -8,6 +8,7 @@ import {
   SWITCH_LOADING_STATUS,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  SET_USERID,
 } from "../reducers/types";
 
 const AuthContext = createContext();
