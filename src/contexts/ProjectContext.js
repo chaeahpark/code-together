@@ -15,8 +15,8 @@ const ProjectProvider = ({ children }) => {
   const [state, dispatch] = useReducer(projectReducer, initialState);
   const { user } = useAuth();
 
-  const getProject = () => {
-    dispatch({ type: GET_PROJECT });
+  const getProjects = (projects) => {
+    dispatch({ type: GET_PROJECT, payload: projects });
   };
 
   const setTitle = (title) => {
@@ -39,7 +39,7 @@ const ProjectProvider = ({ children }) => {
     postWriter: state.currentProject.userId,
     postSaved: state.currentProject.saved,
     postCreatedAt: state.currentProject.createdAt,
-    getProject,
+    getProjects,
     setTitle,
     setContent,
     setTags,

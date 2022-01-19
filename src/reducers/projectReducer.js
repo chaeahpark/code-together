@@ -79,7 +79,7 @@ const projectReducer = (state, action) => {
 
   switch (type) {
     case GET_PROJECT:
-      return { ...state };
+      return { ...state, projectList: payload };
     case ADD_PROJECT:
       return { ...state, projectList: projectList.push(payload) };
     case SET_TITLE:

@@ -1,5 +1,5 @@
-import { colTest } from "../api/postApi";
-import { collection, addDoc } from "firebase/firestore";
+import { postsCollection } from "../api/postApi";
+import { addDoc } from "firebase/firestore";
 
 import Tags from "../components/Tags";
 import TextEditor from "../components/textEditor/TextEditor";
@@ -9,14 +9,8 @@ import { useProjects } from "../contexts/ProjectContext";
 import { useAuth } from "../contexts/AuthContext";
 
 const AddPost = () => {
-  const {
-    setTitle,
-    postTitle,
-    postContent,
-    postTags,
-    postWriter,
-    postCreatedAt,
-  } = useProjects();
+  const { setTitle, postTitle, postContent, postTags, postCreatedAt } =
+    useProjects();
 
   const { user } = useAuth();
 
@@ -28,18 +22,17 @@ const AddPost = () => {
 
       // set the timestamp
       try {
-        const docRef = await addDoc(colTest, {
+        const docRef = await addDoc(postsCollection, {
           title: postTitle,
           content: postContent,
           tags: postTags,
           userUid: user.uid,
+          createdAt: new Date(),
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
-
-      console.log(colTest);
 
       // save to the firestore
     } else return console.log("please complete the form");
