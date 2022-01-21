@@ -15,6 +15,7 @@ const ProjectProvider = ({ children }) => {
   const [state, dispatch] = useReducer(projectReducer, initialState);
   const { user } = useAuth();
 
+  // TODO: change the naming "getProject -> setProjects"
   const getProjects = (projects) => {
     dispatch({ type: GET_PROJECT, payload: projects });
   };
