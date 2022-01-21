@@ -31,39 +31,33 @@ const ProjectCard = () => {
   const renderCards = projectList.map((project) => {
     return (
       <div className="group__card" key={uuid()}>
-        {console.log("renderCards")}
+        <div className="group__langs">
+          <img
+            className="group__lang"
+            src={require("../../assets/images/javascript.png")}
+            alt="javascript"
+          />
+          <img
+            className="group__lang"
+            src={require("../../assets/images/react.png")}
+            alt="react"
+          />
+        </div>
         <p className="group__title">{project.title}</p>
         <p className="group__writer">written by {project.userUid}</p>
+        <div className="group__icons">
+          <div className="group__icons--comments">
+            <FontAwesomeIcon icon={faComments} />
+            <p className="comment__total">Edit here</p>
+          </div>
+          <div className="group__icons--saved">
+            <FontAwesomeIcon icon={faBookmark} />
+            <p className="comment__saved--total">5</p>
+          </div>
+        </div>
       </div>
     );
   });
-
-  // <div className="group__card">
-  //   <div className="group__langs">
-  //     <img
-  //       className="group__lang"
-  //       src={require("../../assets/images/javascript.png")}
-  //       alt="javascript"
-  //     />
-  //     <img
-  //       className="group__lang"
-  //       src={require("../../assets/images/react.png")}
-  //       alt="react"
-  //     />
-  //   </div>
-  //   <p className="group__title">{project.title}</p>
-  //   <p className="group__writer">written by {project.userUid}</p>
-  //   <div className="group__icons">
-  //     <div className="group__icons--comments">
-  //       <FontAwesomeIcon icon={faComments} />
-  //       <p className="comment__total">Edit here</p>
-  //     </div>
-  //     <div className="group__icons--saved">
-  //       <FontAwesomeIcon icon={faBookmark} />
-  //       <p className="comment__saved--total">5</p>
-  //     </div>
-  //   </div>
-  // </div>
 
   return <>{renderCards}</>;
 };
