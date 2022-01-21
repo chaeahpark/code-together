@@ -41,9 +41,8 @@ const Sidebar = () => {
       <div className="main__sidebar">
         <div className="sidebar__tags">
           <h3 className="main__title title--tag">Tags</h3>
-          <ul>{renderTags}</ul>
+          <ul className="sidebar__tagList">{renderTags}</ul>
         </div>
-        <div className="sidebar__languages"></div>
       </div>
     </>
   );
