@@ -17,7 +17,10 @@ const Sidebar = () => {
   const handleOnTagClick = async (option) => {
     const filteredProjects = [];
     const dataSnapshot = await getDocs(tagQuery(option));
-    dataSnapshot.forEach((doc) => filteredProjects.push(doc.data()));
+    dataSnapshot.forEach((doc) => {
+      const project = { ...doc.data(), postId: doc.id };
+      filteredProjects.push(project);
+    });
 
     getProjects(filteredProjects);
   };

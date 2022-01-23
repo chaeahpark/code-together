@@ -8,6 +8,7 @@ import {
   SET_TAGS,
   SET_USERID,
   SET_CREATEDAT,
+  SET_POSTID,
 } from "./types";
 
 // const initialState = {
@@ -68,6 +69,7 @@ const initialState = {
     content: null,
     tags: [],
     userId: "",
+    postId: "",
     saved: 0,
     createdAt: null, // how to set a timestamp?
   },
@@ -106,6 +108,12 @@ const projectReducer = (state, action) => {
       return {
         ...state,
         currentProject: { ...currentProject, createdAt: payload },
+      };
+
+    case SET_POSTID:
+      return {
+        ...state,
+        currentProject: { ...currentProject, postId: payload },
       };
     default:
       return state;

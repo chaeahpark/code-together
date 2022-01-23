@@ -6,6 +6,7 @@ import {
   SET_CONTENT,
   SET_TAGS,
   SET_USERID,
+  SET_POSTID,
 } from "../reducers/types";
 import { useAuth } from "./AuthContext";
 
@@ -32,6 +33,10 @@ const ProjectProvider = ({ children }) => {
     dispatch({ type: SET_TAGS, payload: tags });
   };
 
+  const setPostId = (postId) => {
+    dispatch({ type: SET_POSTID, payload: postId });
+  };
+
   const value = {
     projectList: state.projectList,
     postTitle: state.currentProject.title,
@@ -39,11 +44,12 @@ const ProjectProvider = ({ children }) => {
     postTags: state.currentProject.tags,
     postWriter: state.currentProject.userId,
     postSaved: state.currentProject.saved,
-    postCreatedAt: state.currentProject.createdAt,
+
     getProjects,
     setTitle,
     setContent,
     setTags,
+    setPostId,
   };
 
   return (

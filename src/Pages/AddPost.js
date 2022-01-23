@@ -1,5 +1,5 @@
 import { postsCollection } from "../api/postApi";
-import { addDoc } from "firebase/firestore";
+import { addDoc, DocumentReference } from "firebase/firestore";
 
 import Tags from "../components/Tags";
 import TextEditor from "../components/textEditor/TextEditor";
@@ -9,7 +9,7 @@ import { useProjects } from "../contexts/ProjectContext";
 import { useAuth } from "../contexts/AuthContext";
 
 const AddPost = () => {
-  const { setTitle, postTitle, postContent, postTags, postCreatedAt } =
+  const { setTitle, postTitle, postContent, postTags, setPostId } =
     useProjects();
 
   const { user } = useAuth();
@@ -29,7 +29,7 @@ const AddPost = () => {
           userUid: user.uid,
           createdAt: new Date(),
         });
-        console.log("Document written with ID: ", docRef.id);
+        setPostId(docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
