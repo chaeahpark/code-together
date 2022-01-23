@@ -34,7 +34,10 @@ const ProjectCard = () => {
   const renderCards = projectList.map((project) => {
     return (
       <div className="group__card" key={uuid()}>
-        <Link to={`/project/${project.postId}`}>
+        <Link
+          to={`/project/${project.postId}`}
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
           <div className="group__langs">
             <img
               className="group__lang"

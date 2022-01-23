@@ -415,6 +415,32 @@ code {
   width: 80vw;
 }
 
+/* ----- PROJECT DETAILS PAGE ----- */
+.projectDetail-container {
+  border: 1px solid black;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+}
+
+.projectDetail-wrapper {
+  border: 1px solid orange;
+  width: 80vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.projectDetail-header-box {
+  border: 1px solid green;
+}
+
+.projectDetail-content-box {
+  border: 1px solid green;
+}
+
 /* test */
 @media screen and (max-width: 729px) {
 }

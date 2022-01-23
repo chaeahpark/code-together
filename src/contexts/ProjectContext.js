@@ -44,6 +44,7 @@ const ProjectProvider = ({ children }) => {
     postTags: state.currentProject.tags,
     postWriter: state.currentProject.userId,
     postSaved: state.currentProject.saved,
+    postId: state.currentProject.postId,
 
     getProjects,
     setTitle,
