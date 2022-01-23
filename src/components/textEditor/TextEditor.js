@@ -18,7 +18,10 @@ const TextEditor = () => {
     if (quill) {
       quill.on("text-change", (delta, oldDelta, source) => {
         const quillDelta = quill.getContents().ops;
-        setContent(quillDelta);
+
+        const quillHtml = quill.root.innerHTML;
+        console.log("quill html", quillHtml);
+        setContent(quillHtml);
       });
     }
   }, [quill]);

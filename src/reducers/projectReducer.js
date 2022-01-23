@@ -9,6 +9,7 @@ import {
   SET_USERID,
   SET_CREATEDAT,
   SET_POSTID,
+  SET_CURRENT_PROJECT,
 } from "./types";
 
 // const initialState = {
@@ -115,6 +116,9 @@ const projectReducer = (state, action) => {
         ...state,
         currentProject: { ...currentProject, postId: payload },
       };
+
+    case SET_CURRENT_PROJECT:
+      return { ...state, currentProject: payload };
     default:
       return state;
   }
