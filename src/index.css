@@ -435,10 +435,26 @@ code {
 
 .projectDetail-header-box {
   border: 1px solid green;
+  margin-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 28px;
+}
+
+.projectDetail-header-text {
+  margin: 0;
 }
 
 .projectDetail-content-box {
-  border: 1px solid green;
+}
+
+.projectDetail-singleTag {
+  background-color: var(--border-color);
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 15px;
+
+  font-size: 18px;
 }
 
 /* test */

@@ -24,14 +24,35 @@ const ProjectDetails = () => {
         throw Error(e);
       }
       setCurrentProject(project);
+      console.log("here is asynchronous");
     };
 
     fetchPostData();
+    console.log("here is useEffect");
   }, []);
 
   const renderTags = currentProject.tags.map((tag) => {
-    return <span key={uuid()}> {tag} </span>;
+    return (
+      <span className="projectDetail-singleTag" key={uuid()}>
+        {" "}
+        {tag}{" "}
+      </span>
+    );
   });
+
+  const renderTime = () => {
+    const { createdAt } = currentProject;
+
+    if (createdAt) {
+      const fullDate = new Date(createdAt.seconds * 1000);
+
+      const year = fullDate.getFullYear();
+      const month = fullDate.getMonth();
+      const date = fullDate.getDate();
+
+      return `${year} ${month}  ${date}`;
+    } else if (!createdAt) return "";
+  };
 
   return (
     <div className="projectDetail-container">
@@ -43,7 +64,9 @@ const ProjectDetails = () => {
           <h2 className="projectDetail-header-text">{currentProject.title}</h2>
         </div>
         <div className="projectDetail-meta-box projectDetail-meta-box__createdAt">
-          <p className="projectDetail-meta-text projectDetail-meta-text__createdAt"></p>
+          <p className="projectDetail-meta-text projectDetail-meta-text__createdAt">
+            {renderTime()}
+          </p>
         </div>
         <div className="projectDetail-tag-box">
           <p className="projectDetail-tag-text">{renderTags}</p>

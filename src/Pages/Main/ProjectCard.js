@@ -27,8 +27,6 @@ const ProjectCard = () => {
       console.log("get data");
     };
     getData();
-
-    console.log("useEffect done");
   }, []);
 
   const renderCards = projectList.map((project) => {
