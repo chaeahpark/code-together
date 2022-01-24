@@ -5,13 +5,17 @@ import { useEffect } from "react";
 
 import { getDoc, doc } from "firebase/firestore";
 import database from "../../api/postApi";
+
 import { useProjects } from "../../contexts/ProjectContext";
-import { render } from "@testing-library/react";
+import { useAuth } from "../../contexts/AuthContext";
+
 import uuid from "react-uuid";
 
 const ProjectDetails = () => {
   let { postId } = useParams();
+
   const { setCurrentProject, currentProject } = useProjects();
+  const { user } = useAuth();
 
   useEffect(() => {
     let project = {};
@@ -24,11 +28,9 @@ const ProjectDetails = () => {
         throw Error(e);
       }
       setCurrentProject(project);
-      console.log("here is asynchronous");
     };
 
     fetchPostData();
-    console.log("here is useEffect");
   }, []);
 
   const renderTags = currentProject.tags.map((tag) => {
@@ -47,11 +49,39 @@ const ProjectDetails = () => {
       const fullDate = new Date(createdAt.seconds * 1000);
 
       const year = fullDate.getFullYear();
-      const month = fullDate.getMonth();
+      const monthLong = [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC",
+      ];
+
+      let month = fullDate.getMonth(); //! edit the month style to JAN, FEB, MAR etc
+      month = monthLong[month];
       const date = fullDate.getDate();
 
-      return `${year} ${month}  ${date}`;
+      return `${date} ${month} ${year}`;
     } else if (!createdAt) return "";
+  };
+
+  const renderBtn = () => {
+    // check if the user uid
+    // and the uid of currently displayed project
+    // is matching.
+
+    if (user && user.uid && currentProject) {
+      return user.uid === currentProject.userUid ? (
+        <button className="editBtn"> Edit </button>
+      ) : null;
+    }
   };
 
   return (
@@ -69,14 +99,17 @@ const ProjectDetails = () => {
           </p>
         </div>
         <div className="projectDetail-tag-box">
-          <p className="projectDetail-tag-text">{renderTags}</p>
+          <p className="projectDetail-tag-text">Categories: {renderTags}</p>
         </div>
-        <br className="projectDetails-line" />
+
         <div
           className="projectDetail-content-box"
           dangerouslySetInnerHTML={{ __html: currentProject.content }}
         ></div>
-        <br className="projectDetails-line" />
+
+        <div className="projectDetail-btn projectDetail-btn__edit">
+          {renderBtn()}
+        </div>
       </div>
     </div>
   );

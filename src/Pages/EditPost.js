@@ -1,40 +1,35 @@
-import { postsCollection } from "../api/postApi";
-import { addDoc } from "firebase/firestore";
-
+import { useParams } from "react-router-dom";
 import Tags from "../components/Tags";
 import TextEditor from "../components/textEditor/TextEditor";
-
 import { useProjects } from "../contexts/ProjectContext";
-import { useAuth } from "../contexts/AuthContext";
 
-const AddPost = () => {
+const EditPost = () => {
+  const { postId } = useParams();
   const { setTitle, postTitle, postContent, postTags, setPostId } =
     useProjects();
 
-  const { user } = useAuth();
-
+  //! Customize the handleSubmit function
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (postTitle && postContent && postTags.length > 0) {
       // take the user info (uid)
-
       // set the timestamp
-      try {
-        const docRef = await addDoc(postsCollection, {
-          title: postTitle,
-          content: postContent,
-          tags: postTags,
-          userUid: user.uid,
-          createdAt: new Date(),
-        });
-        setPostId(docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-
-      // save to the firestore
-    } else return console.log("please complete the form");
+      //   try {
+      //     const docRef = await addDoc(postsCollection, {
+      //       title: postTitle,
+      //       content: postContent,
+      //       tags: postTags,
+      //       userUid: user.uid,
+      //       createdAt: new Date(),
+      //     });
+      //     setPostId(docRef.id);
+      //   } catch (e) {
+      //     console.error("Error adding document: ", e);
+      //   }
+      //   // save to the firestore
+      // } else return console.log("please complete the form");
+    }
   };
 
   return (
@@ -63,4 +58,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default EditPost;

@@ -13,6 +13,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -425,7 +426,7 @@ code {
 }
 
 .projectDetail-wrapper {
-  border: 1px solid orange;
+  padding: 0 20px;
   width: 80vw;
   height: auto;
   display: flex;
@@ -434,7 +435,6 @@ code {
 }
 
 .projectDetail-header-box {
-  border: 1px solid green;
   margin-top: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -443,9 +443,14 @@ code {
 
 .projectDetail-header-text {
   margin: 0;
+  padding: 10px 0;
 }
 
-.projectDetail-content-box {
+.projectDetail-meta-box__createdAt,
+.projectDetail-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .projectDetail-singleTag {
@@ -455,6 +460,29 @@ code {
   border-radius: 15px;
 
   font-size: 18px;
+}
+
+.projectDetail-content-box {
+  border: 1px solid salmon;
+  margin: 20px 0;
+}
+
+.projectDetail-btn {
+  margin-top: 20px;
+}
+
+.editBtn {
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  border: none;
+}
+
+.editBtn:hover {
+  cursor: pointer;
+  background-color: var(--btn-hover-color);
+  border: none;
 }
 
 /* test */

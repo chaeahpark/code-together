@@ -13,6 +13,7 @@ import TagProvider from "./contexts/TagContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectDetails from "./pages/projectDetails/ProjectDetails";
+import EditPost from "./pages/EditPost";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
                   <Route
                     path="/project/:postId"
                     element={<ProjectDetails />}
+                  ></Route>
+                  <Route
+                    path="/editpost/:postId"
+                    element={<EditPost />}
                   ></Route>
                   <Route path="*" element={<NotFound />}></Route>
                 </Routes>
