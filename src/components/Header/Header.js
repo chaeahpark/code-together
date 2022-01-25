@@ -49,12 +49,18 @@ const Header = () => {
     changeToggle(!toggle);
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <header className="header">
         <div className="header__container">
           <div className="header__left">
-            <h1 className="header__logo">DEVAROUND</h1>
+            <h1 className="header__logo" onClick={handleLogoClick}>
+              DEVAROUND
+            </h1>
             <Searchbar />
           </div>
 

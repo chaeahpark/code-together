@@ -8,7 +8,7 @@ import { useProjects } from "../contexts/ProjectContext";
 
 const Tags = () => {
   const { options } = useTag();
-  const { setTags } = useProjects();
+  const { setTags, postTags } = useProjects();
 
   return (
     <div className="tag-wrapper">
@@ -16,6 +16,8 @@ const Tags = () => {
         multiple
         id="tags-standard"
         options={options}
+        value={postTags}
+        defaultValue={postTags}
         onChange={(e, value) => {
           setTags(value);
         }}

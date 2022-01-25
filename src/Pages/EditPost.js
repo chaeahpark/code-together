@@ -5,7 +5,7 @@ import Tags from "../components/Tags";
 import TextEditor from "../components/textEditor/TextEditor";
 import { useProjects } from "../contexts/ProjectContext";
 
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, updateDoc, doc } from "firebase/firestore";
 import database from "../api/postApi";
 
 const EditPost = () => {
@@ -30,26 +30,17 @@ const EditPost = () => {
   }, []);
 
   //! Customize the handleSubmit function
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    try {
+      const postDocRef = doc(database, "posts", postId);
 
-    if (postTitle && postContent && postTags.length > 0) {
-      // take the user info (uid)
-      // set the timestamp
-      //   try {
-      //     const docRef = await addDoc(postsCollection, {
-      //       title: postTitle,
-      //       content: postContent,
-      //       tags: postTags,
-      //       userUid: user.uid,
-      //       createdAt: new Date(),
-      //     });
-      //     setPostId(docRef.id);
-      //   } catch (e) {
-      //     console.error("Error adding document: ", e);
-      //   }
-      //   // save to the firestore
-      // } else return console.log("please complete the form");
+      await updateDoc(postDocRef, {
+        title: postTitle,
+        content: postContent,
+        tags: postTags,
+      });
+    } catch (e) {
+      throw Error(e);
     }
   };
 
@@ -72,7 +63,7 @@ const EditPost = () => {
         <TextEditor />
       </div>
       <div className="addPost-btn addPost-btn__submit">
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
+        <button type="submit" onClick={handleSubmit}>
           Publish
         </button>
       </div>

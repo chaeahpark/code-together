@@ -61,6 +61,11 @@ code {
   font-size: 20px;
 }
 
+.header__logo:hover {
+  cursor: pointer;
+  font-size: 20px;
+}
+
 .header__form {
   height: 30px;
   width: 300px;
