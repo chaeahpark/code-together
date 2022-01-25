@@ -73,19 +73,27 @@ const ProjectDetails = () => {
     } else if (!createdAt) return "";
   };
 
-  const renderBtn = () => {
+  const handleEditClick = () => {
+    //! How to move
+    navigate("/editpost/" + postId, { replace: true });
+  };
+
+  const renderEditBtn = () => {
     // check if the user uid
     // and the uid of currently displayed project
     // is matching.
 
     if (user && user.uid && currentProject) {
       return user.uid === currentProject.userUid ? (
-        <button className="editBtn"> Edit </button>
+        <button className="editBtn" onClick={handleEditClick}>
+          {" "}
+          Edit{" "}
+        </button>
       ) : null;
     }
   };
 
-  const handleBackBtnClick = () => {
+  const handleBackClick = () => {
     navigate(-1);
   };
 
@@ -96,7 +104,7 @@ const ProjectDetails = () => {
           <FontAwesomeIcon
             icon={faArrowLeft}
             size="2x"
-            onClick={handleBackBtnClick}
+            onClick={handleBackClick}
           />
         </div>
         <div className="projectDetail-header-box">
@@ -117,7 +125,7 @@ const ProjectDetails = () => {
         ></div>
 
         <div className="projectDetail-btn projectDetail-btn__edit">
-          {renderBtn()}
+          {renderEditBtn()}
         </div>
       </div>
     </div>
