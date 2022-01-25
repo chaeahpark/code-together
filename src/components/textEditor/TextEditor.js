@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 
@@ -8,6 +10,7 @@ import { toolbarOptions } from "./EditorToolbar";
 import { useProjects } from "../../contexts/ProjectContext";
 
 const TextEditor = () => {
+  const { postId } = useParams();
   const { setContent, postContent } = useProjects();
 
   const { quill, quillRef, Quill } = useQuill({
@@ -16,11 +19,14 @@ const TextEditor = () => {
 
   useEffect(() => {
     if (quill) {
-      quill.on("text-change", (delta, oldDelta, source) => {
-        const quillDelta = quill.getContents().ops;
+      // set initial value if there is a params on url.
+      if (postId) {
+        quill.clipboard.dangerouslyPasteHTML(`${postContent}`);
+      }
 
+      quill.on("text-change", (delta, oldDelta, source) => {
+        // const quillDelta = quill.getContents().ops;
         const quillHtml = quill.root.innerHTML;
-        console.log("quill html", quillHtml);
         setContent(quillHtml);
       });
     }

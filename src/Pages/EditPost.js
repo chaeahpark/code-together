@@ -1,12 +1,33 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import Tags from "../components/Tags";
 import TextEditor from "../components/textEditor/TextEditor";
 import { useProjects } from "../contexts/ProjectContext";
 
+import { getDoc, doc } from "firebase/firestore";
+import database from "../api/postApi";
+
 const EditPost = () => {
   const { postId } = useParams();
-  const { setTitle, postTitle, postContent, postTags, setPostId } =
+  const { setTitle, postTitle, postContent, postTags, setCurrentProject } =
     useProjects();
+
+  useEffect(() => {
+    let project = {};
+
+    const fetchPostData = async () => {
+      try {
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        project = snapShot.data();
+      } catch (e) {
+        throw Error(e);
+      }
+      setCurrentProject(project);
+    };
+
+    fetchPostData();
+  }, []);
 
   //! Customize the handleSubmit function
   const handleSubmit = async (e) => {
@@ -41,6 +62,7 @@ const EditPost = () => {
             className="textEditor-title__input"
             type="text"
             placeholder="Post title here..."
+            value={postTitle}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
