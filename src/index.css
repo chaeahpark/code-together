@@ -434,6 +434,12 @@ code {
   justify-content: center;
 }
 
+.projectDetail-back:hover {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+}
+
 .projectDetail-header-box {
   margin-top: 20px;
   padding-top: 15px;

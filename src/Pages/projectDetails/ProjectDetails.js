@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
@@ -13,6 +13,7 @@ import uuid from "react-uuid";
 
 const ProjectDetails = () => {
   let { postId } = useParams();
+  let navigate = useNavigate();
 
   const { setCurrentProject, currentProject } = useProjects();
   const { user } = useAuth();
@@ -84,11 +85,19 @@ const ProjectDetails = () => {
     }
   };
 
+  const handleBackBtnClick = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="projectDetail-container">
       <div className="projectDetail-wrapper">
-        <div className="proejctDetails-btn">
-          <FontAwesomeIcon icon={faArrowLeft} size="2x" />
+        <div className="projectDetail-back">
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            size="2x"
+            onClick={handleBackBtnClick}
+          />
         </div>
         <div className="projectDetail-header-box">
           <h2 className="projectDetail-header-text">{currentProject.title}</h2>
