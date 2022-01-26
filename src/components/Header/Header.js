@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useProfile } from "../../contexts/ProfileContext";
 
 import Avatar from "react-avatar";
+import OutsideClickHandler from "../OutsideClickHandler";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -78,8 +79,10 @@ const Header = () => {
               </button>
             </div>
             <div className="header__avatar" onClick={handleProfileClick}>
-              {renderAvatar()}
-              {toggle ? <ProfileDropdown /> : null}
+              <OutsideClickHandler>
+                {renderAvatar()}
+                {toggle ? <ProfileDropdown /> : null}
+              </OutsideClickHandler>
             </div>
           </div>
         </div>

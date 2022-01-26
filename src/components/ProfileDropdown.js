@@ -1,5 +1,6 @@
-import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import { useProfile } from "../contexts/ProfileContext";
 
 const ProfileDropdown = () => {

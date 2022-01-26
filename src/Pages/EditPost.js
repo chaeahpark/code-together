@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import { getDoc, updateDoc, doc } from "firebase/firestore";
+import database from "../api/postApi";
 
 import Tags from "../components/Tags";
 import TextEditor from "../components/textEditor/TextEditor";
 import { useProjects } from "../contexts/ProjectContext";
-
-import { getDoc, updateDoc, doc } from "firebase/firestore";
-import database from "../api/postApi";
 
 const EditPost = () => {
   const { postId } = useParams();
@@ -29,11 +29,9 @@ const EditPost = () => {
     fetchPostData();
   }, []);
 
-  //! Customize the handleSubmit function
   const handleSubmit = async () => {
     try {
       const postDocRef = doc(database, "posts", postId);
-
       await updateDoc(postDocRef, {
         title: postTitle,
         content: postContent,

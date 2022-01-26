@@ -1,7 +1,5 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { getDoc, doc } from "firebase/firestore";
 import database from "../../api/postApi";
@@ -9,6 +7,8 @@ import database from "../../api/postApi";
 import { useProjects } from "../../contexts/ProjectContext";
 import { useAuth } from "../../contexts/AuthContext";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-uuid";
 
 const ProjectDetails = () => {
