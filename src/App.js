@@ -4,6 +4,9 @@ import Main from "./pages/main/Main";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import AddPost from "./pages/AddPost";
+import ProjectDetails from "./pages/projectDetails/ProjectDetails";
+import EditPost from "./pages/EditPost";
+import MyProfile from "./pages/myProfile/MyProfile";
 import NotFound from "./pages/NotFound";
 
 import ProjectProvider from "./contexts/ProjectContext";
@@ -12,8 +15,6 @@ import AuthProvider from "./contexts/AuthContext";
 import TagProvider from "./contexts/TagContext";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProjectDetails from "./pages/projectDetails/ProjectDetails";
-import EditPost from "./pages/EditPost";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                     path="/editpost/:postId"
                     element={<EditPost />}
                   ></Route>
+                  <Route path="/myprofile" element={<MyProfile />}></Route>
                   <Route path="*" element={<NotFound />}></Route>
                 </Routes>
               </TagProvider>
