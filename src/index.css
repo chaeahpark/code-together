@@ -532,6 +532,13 @@ code {
   margin-right: 20px;
 }
 
+.image-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
 /* test */
 @media screen and (max-width: 729px) {
 }

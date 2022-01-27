@@ -1,7 +1,26 @@
 import React from "react";
 import profileDefault from "../../assets/images/profileDefault.png";
+import { useAuth } from "../../contexts/AuthContext";
+
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const MyProfile = () => {
+  const { updateProfileImage, profileImageFile } = useAuth;
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+
+    const storage = getStorage();
+    const imagesRef = ref(storage, file.name);
+
+    await uploadBytes(imagesRef, file);
+  };
+
+  const onFileUpload = () => {
+    const formData = new FormData();
+    formData("profileImage", profileImageFile);
+  };
+
   return (
     <div className="myProfile-container">
       <div className="myProfile-wrapper">
@@ -17,6 +36,7 @@ const MyProfile = () => {
                   className="image-btn__choose"
                   type="file"
                   accept="image/*"
+                  onChange={onFileChange}
                 />
               </label>
               <button className="image-btn__delete">Delete image</button>
