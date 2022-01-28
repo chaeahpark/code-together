@@ -2,10 +2,10 @@ import React from "react";
 import profileDefault from "../../assets/images/profileDefault.png";
 import { useAuth } from "../../contexts/AuthContext";
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const MyProfile = () => {
-  const { updateProfileImage, profileImageFile } = useAuth;
+  const { setProfileImageUrl, profileImageUrl } = useAuth();
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
@@ -13,17 +13,18 @@ const MyProfile = () => {
     const storage = getStorage();
     const imagesRef = ref(storage, file.name);
 
+    // update image file on firestore
     await uploadBytes(imagesRef, file);
-  };
 
-  const onFileUpload = () => {
-    const formData = new FormData();
-    formData("profileImage", profileImageFile);
+    const url = await getDownloadURL(imagesRef);
+    setProfileImageUrl(url);
+    console.log(profileImageUrl);
   };
 
   return (
     <div className="myProfile-container">
       <div className="myProfile-wrapper">
+        {console.log("url", profileImageUrl)}
         <h2 className="myProfile-header">My profile</h2>
         <div className="myProfile-image">
           <div className="image-display">

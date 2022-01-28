@@ -6,7 +6,7 @@ import {
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
   SWITCH_LOADING_STATUS,
-  UPDATE_PROFILE_IMAGE,
+  SET_PROFILE_IMAGE_URL,
   LOGIN_FAIL,
 } from "../reducers/types";
 
@@ -57,8 +57,8 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const updateProfileImage = (image) => {
-    dispatch({ type: UPDATE_PROFILE_IMAGE, payload: image });
+  const setProfileImageUrl = (url) => {
+    dispatch({ type: SET_PROFILE_IMAGE_URL, payload: url });
   };
 
   const value = {
@@ -73,8 +73,8 @@ const AuthProvider = ({ children }) => {
     logout,
     loginError: state.loginError,
     setLoginError,
-    profileImageFile: state.profileImageFile,
-    updateProfileImage,
+    profileImageUrl: state.profileImageUrl,
+    setProfileImageUrl,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
