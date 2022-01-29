@@ -7,6 +7,7 @@ import {
   SIGNUP_SUCCESS,
   SWITCH_LOADING_STATUS,
   SET_PROFILE_IMAGE_URL,
+  SET_USER_NAME,
   LOGIN_FAIL,
 } from "../reducers/types";
 
@@ -19,7 +20,10 @@ const AuthProvider = ({ children }) => {
     // check the user status when tha app is loaded
     const unsubscribe = auth.onAuthStateChanged((user) => {
       dispatch({ type: GET_CURRENT_USER, payload: user });
-
+      if (user) {
+        setUserName(user.displayName);
+        setProfileImageUrl(user.photoURL);
+      }
       setLoading(false);
     });
 
@@ -61,6 +65,14 @@ const AuthProvider = ({ children }) => {
     dispatch({ type: SET_PROFILE_IMAGE_URL, payload: url });
   };
 
+  const setUserName = (name) => {
+    dispatch({ type: SET_USER_NAME, payload: name });
+  };
+
+  const setUser = (user) => {
+    dispatch({ type: GET_CURRENT_USER, payload: user });
+  };
+
   const value = {
     user: state.user,
     loading: state.loading,
@@ -75,6 +87,9 @@ const AuthProvider = ({ children }) => {
     setLoginError,
     profileImageUrl: state.profileImageUrl,
     setProfileImageUrl,
+    setUserName,
+    name: state.name,
+    setUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -7,6 +7,7 @@ import {
   LOGIN_SUCCESS,
   SET_USERID,
   SET_PROFILE_IMAGE_URL,
+  SET_USER_NAME,
 } from "./types";
 
 export const authInitialState = {
@@ -15,6 +16,7 @@ export const authInitialState = {
   signupError: "",
   loading: true,
   profileImageUrl: "",
+  name: "",
 };
 
 export const authReducer = (state, action) => {
@@ -36,6 +38,8 @@ export const authReducer = (state, action) => {
       return { ...state, loginError: payload };
     case SET_PROFILE_IMAGE_URL:
       return { ...state, profileImageUrl: payload };
+    case SET_USER_NAME:
+      return { ...state, name: payload };
     default:
       return state;
   }

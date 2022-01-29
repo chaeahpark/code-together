@@ -3,6 +3,12 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 import { LOGIN_FAIL, LOGIN_SUCCESS } from "../../reducers/types";
+import {
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+  EmailAuthProvider,
+} from "firebase/auth";
+import auth from "../../api/authApi";
 
 const Login = () => {
   const { user, login, setLoginError, loginError, setLoading, loading } =
