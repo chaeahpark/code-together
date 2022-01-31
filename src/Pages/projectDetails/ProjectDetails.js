@@ -8,7 +8,12 @@ import { useProjects } from "../../contexts/ProjectContext";
 import { useAuth } from "../../contexts/AuthContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faHeart,
+  faBookmark,
+} from "@fortawesome/free-solid-svg-icons";
+
 import uuid from "react-uuid";
 
 const ProjectDetails = () => {
@@ -37,8 +42,7 @@ const ProjectDetails = () => {
   const renderTags = currentProject.tags.map((tag) => {
     return (
       <span className="projectDetail-singleTag" key={uuid()}>
-        {" "}
-        {tag}{" "}
+        #{tag}
       </span>
     );
   });
@@ -123,7 +127,20 @@ const ProjectDetails = () => {
           className="projectDetail-content-box"
           dangerouslySetInnerHTML={{ __html: currentProject.content }}
         ></div>
-
+        <div className="projectDetail-actionBtns">
+          <div className="projectDetail-btn ">
+            <div className="projectDetail-btn__heart">
+              <FontAwesomeIcon icon={faHeart} size="lg" />
+            </div>
+            <span className="btn-counter">{currentProject.heart.length}</span>
+          </div>
+          <div className="projectDetail-btn">
+            <div className="projectDetail-btn__save">
+              <FontAwesomeIcon icon={faBookmark} size="lg" />
+            </div>
+            <span className="btn-counter">{currentProject.save.length}</span>
+          </div>
+        </div>
         <div className="projectDetail-btn projectDetail-btn__edit">
           {renderEditBtn()}
         </div>

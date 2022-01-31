@@ -27,6 +27,8 @@ const AddPost = () => {
           tags: postTags,
           userUid: user.uid,
           createdAt: new Date(),
+          heart: [],
+          save: [],
         });
         setPostId(docRef.id);
       } catch (e) {

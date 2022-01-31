@@ -83,13 +83,11 @@ const MyProfile = () => {
     let pw = prompt("Enter your password");
     console.log(auth.currentUser.email);
     const credential = EmailAuthProvider.credential(auth.currentUser.email, pw);
-    const test = await auth.currentUser.reauthenticateWithCredential(
+    const credentialedUser = await auth.currentUser.reauthenticateWithCredential(
       credential
     );
-    console.log(test.user);
-    // // Now you can use that to reauthenticate
-    // authUser.reauthenticateWithCredential(credential);
-    deleteUser(test.user);
+ 
+    deleteUser(credentialedUser);
     navitate("/");
   };
 
