@@ -1,3 +1,5 @@
+import ProjectDetailActionBtns from "./ProjectDetailActionBtns";
+
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -8,11 +10,7 @@ import { useProjects } from "../../contexts/ProjectContext";
 import { useAuth } from "../../contexts/AuthContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faHeart,
-  faBookmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import uuid from "react-uuid";
 
@@ -77,11 +75,6 @@ const ProjectDetails = () => {
     } else if (!createdAt) return "";
   };
 
-  const handleEditClick = () => {
-    //! How to move
-    navigate("/editpost/" + postId, { replace: true });
-  };
-
   const renderEditBtn = () => {
     // check if the user uid
     // and the uid of currently displayed project
@@ -99,6 +92,11 @@ const ProjectDetails = () => {
 
   const handleBackClick = () => {
     navigate(-1);
+  };
+
+  const handleEditClick = () => {
+    //! How to move
+    navigate("/editpost/" + postId, { replace: true });
   };
 
   return (
@@ -127,20 +125,7 @@ const ProjectDetails = () => {
           className="projectDetail-content-box"
           dangerouslySetInnerHTML={{ __html: currentProject.content }}
         ></div>
-        <div className="projectDetail-actionBtns">
-          <div className="projectDetail-btn ">
-            <div className="projectDetail-btn__heart">
-              <FontAwesomeIcon icon={faHeart} size="lg" />
-            </div>
-            <span className="btn-counter">{currentProject.heart.length}</span>
-          </div>
-          <div className="projectDetail-btn">
-            <div className="projectDetail-btn__save">
-              <FontAwesomeIcon icon={faBookmark} size="lg" />
-            </div>
-            <span className="btn-counter">{currentProject.save.length}</span>
-          </div>
-        </div>
+        {currentProject && user ? <ProjectDetailActionBtns /> : null}
         <div className="projectDetail-btn projectDetail-btn__edit">
           {renderEditBtn()}
         </div>

@@ -10,58 +10,9 @@ import {
   SET_CREATEDAT,
   SET_POSTID,
   SET_CURRENT_PROJECT,
+  SET_HEART,
+  SET_SAVE,
 } from "./types";
-
-// const initialState = {
-//   projects: [
-//     {
-//       postId: 1,
-//       createdAt: "01 Jan 2022",
-//       writerUid: "id",
-//       writerEmail: "abc@gmail.com",
-//       tags: ["javscript", "react"],
-//       title:
-//         "We are looking for front-end and back-end and designers to build an awesome project",
-//       content:
-//         "Are you interested in the projenct? Please leave comments below.",
-//       comments: [
-//         { userUid: "id", timestamp: "05 Jan 2022", comment: "I want to join!" },
-//         { userUid: "id", timestamp: "07 Jan 2022", comment: "Cool project!" },
-//       ],
-//       saved: 3,
-//     },
-//     {
-//       postId: 2,
-//       createdAt: "0 Dec 2021",
-//       writerUid: "id",
-//       writerEmail: "abc@gmail.com",
-//       tags: ["javscript", "nodejs", "react", "vue"],
-//       title: "We are building a library. Do you want to join?",
-//       content:
-//         "We are looking for two backend developers. Please leave comments below.",
-//       comments: [
-//         { userUid: "id", timestamp: "05 Jan 2022", comment: "I want to join!" },
-//         { userUid: "id", timestamp: "07 Jan 2022", comment: "Cool project!" },
-//       ],
-//       saved: 3,
-//     },
-//     {
-//       postId: 3,
-//       createdAt: "0 Dec 2021",
-//       writerUid: "id",
-//       writerEmail: "abc@gmail.com",
-//       tags: ["javscript", "react", "vue"],
-//       title: "We are building a library. Do you want to join?",
-//       content:
-//         "We are looking for two backend developers. Please leave comments below.",
-//       comments: [
-//         { userUid: "id", timestamp: "05 Jan 2022", comment: "I want to join!" },
-//         { userUid: "id", timestamp: "07 Jan 2022", comment: "Cool project!" },
-//       ],
-//       saved: 5,
-//     },
-//   ],
-// };
 
 const initialState = {
   projectList: [],
@@ -71,7 +22,8 @@ const initialState = {
     tags: [],
     userId: "",
     postId: "",
-    saved: 0,
+    save: [],
+    heart: ["123fds", "fres21"],
     createdAt: null, // how to set a timestamp?
   },
 };
@@ -119,6 +71,33 @@ const projectReducer = (state, action) => {
 
     case SET_CURRENT_PROJECT:
       return { ...state, currentProject: payload };
+
+    case SET_HEART:
+      // const isHeartOn = currentProject.heart.includes(payload);
+
+      // if (isHeartOn) return { ...state };
+      // else
+      return {
+        ...state,
+        currentProject: {
+          ...currentProject,
+          heart: [...currentProject.heart, payload],
+        },
+      };
+
+    case SET_SAVE:
+      // const isSaveOn = currentProject.save.includes(payload);
+
+      // if (isSaveOn) return { ...state };
+      // else
+      return {
+        ...state,
+        currentProject: {
+          ...currentProject,
+          save: [...currentProject.save, payload],
+        },
+      };
+
     default:
       return state;
   }
