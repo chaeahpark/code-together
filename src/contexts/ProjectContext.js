@@ -44,8 +44,8 @@ const ProjectProvider = ({ children }) => {
     dispatch({ type: SET_CURRENT_PROJECT, payload: project });
   };
 
-  const setHeart = (userUid) => {
-    dispatch({ type: SET_HEART, payload: userUid });
+  const setHeart = (idList) => {
+    dispatch({ type: SET_HEART, payload: idList });
   };
 
   const setSave = (userUid) => {

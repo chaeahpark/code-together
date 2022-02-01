@@ -77,7 +77,7 @@ const projectReducer = (state, action) => {
         ...state,
         currentProject: {
           ...currentProject,
-          heart: payload,
+          heart: [...payload],
         },
       };
 

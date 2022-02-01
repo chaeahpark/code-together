@@ -7,7 +7,14 @@ import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { useProjects } from "../../contexts/ProjectContext";
 import { useAuth } from "../../contexts/AuthContext";
 
-import { updateDoc, doc, arrayUnion, arrayRemove } from "firebase/firestore";
+import {
+  updateDoc,
+  doc,
+  arrayUnion,
+  arrayRemove,
+  getDoc,
+  collection,
+} from "firebase/firestore";
 import database from "../../api/postApi";
 
 const ProjectDetailActionBtns = () => {
@@ -17,59 +24,65 @@ const ProjectDetailActionBtns = () => {
 
   const [heartToggle, setHeartToggle] = useState();
   const [saveToggle, setSaveToggle] = useState();
+  const [heartList, setHeartList] = useState([]);
+  const [saveList, setSaveList] = useState([]);
 
   useEffect(() => {
-    const { heart, save } = currentProject;
-    if (heart.includes(user.uid)) {
-      setHeartToggle(true);
-    } else if (!heart.includes(user.uid)) {
-      setHeartToggle(false);
-    } else if (save.includes(user.uid)) {
-      setSaveToggle(true);
-    } else if (!save.includes(user.uid)) {
-      setSaveToggle(false);
-    }
+    let project;
+
+    const fetchData = async () => {
+      const snapShot = await getDoc(doc(database, "posts", postId));
+      project = snapShot.data();
+
+      setHeartList(project.heart);
+      setSaveList(project.save);
+
+      if (project.heart.includes(user.uid)) {
+        setHeartToggle(true);
+      }
+
+      if (project.save.includes(user.uid)) {
+        setSaveToggle(true);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const heartClickHandler = async (e) => {
-    e.preventDefault();
+  const heartClickHandler = async () => {
     if (!user) {
       alert("Please log in");
-    }
+    } else if (user) {
+      setHeartToggle(!heartToggle);
 
-    setHeartToggle(!heartToggle);
-
-    if (heartToggle === true) {
-      // save the userUid to heart property
-      // in the current projenct document.
-      const projectRef = doc(database, "posts", postId);
-      await updateDoc(projectRef, {
-        heart: arrayUnion(user.uid),
-      });
-
-      const isAlreadyHeart = currentProject.heart.find(
-        (heartId) => heartId === user.uid
-      );
-
-      if (!isAlreadyHeart) {
-        const newList = currentProject.heart.push(user.uid);
-        setHeart(newList);
-        console.log("heart list", currentProject.heart);
+      if (heartToggle === true) {
+        console.log("true!!!!");
+        const projectRef = doc(database, "posts", postId);
+        await updateDoc(projectRef, {
+          heart: arrayUnion(user.uid),
+        });
+      } else if (heartToggle === false) {
+        console.log("false!!!");
+        const projectRef = doc(database, "posts", postId);
+        await updateDoc(projectRef, {
+          heart: arrayRemove(user.uid),
+        });
       }
-    } else if (heartToggle === false) {
-      const projectRef = doc(database, "posts", postId);
-      await updateDoc(projectRef, {
-        heart: arrayRemove(user.uid),
-      });
-
-      const updatedList = currentProject.heart.filter((heartId) => {
-        return heartId !== user.uid;
-      });
-
-      console.log("updatedList", updatedList);
-      // setHeart(updatedList);
-      console.log("deactivate", currentProject.heart);
     }
+
+    const snapShot = await getDoc(doc(database, "posts", postId));
+    const project = snapShot.data();
+
+    setHeartList(project.heart);
+    setSaveList(project.save);
+
+    // if (heartToggle === true) {
+    //   // save the userUid to heart property
+    //   // in the current projenct document.
+    //   const projectRef = doc(database, "posts", postId);
+    //   await updateDoc(projectRef, {
+    //     heart: arrayUnion(user.uid),
+    //   });
   };
 
   const bookmarkClickHandler = async () => {
@@ -99,7 +112,7 @@ const ProjectDetailActionBtns = () => {
 
   return (
     <div className="projectDetail-actionBtns">
-      {console.log(heartToggle)}
+      {console.log("heart", heartList)}
       <div className="projectDetail-btn ">
         <div
           className={`projectDetail-btn__heart ${
@@ -109,16 +122,15 @@ const ProjectDetailActionBtns = () => {
         >
           <FontAwesomeIcon icon={faHeart} size="lg" />
         </div>
-        {currentProject.heart && (
-          <span className="btn-counter">{currentProject.heart.length}</span>
-        )}
+
+        <span className="btn-counter">{heartList.length}</span>
       </div>
       <div className="projectDetail-btn">
         <div className="projectDetail-btn__save" onClick={bookmarkClickHandler}>
           <FontAwesomeIcon icon={faBookmark} size="lg" />
         </div>
         {currentProject.save && (
-          <span className="btn-counter">{currentProject.save.length}</span>
+          <span className="btn-counter">{saveList.length}</span>
         )}
       </div>
     </div>
