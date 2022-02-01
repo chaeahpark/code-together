@@ -517,6 +517,14 @@ code {
   border-radius: 50%;
 }
 
+.projectDetail-btn__heart.active {
+  background-color: green;
+}
+
+.projectDetail-btn__heart.deactive {
+  background-color: grey;
+}
+
 .btn-counter {
   margin-left: 10px;
 }

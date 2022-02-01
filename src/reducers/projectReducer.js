@@ -73,23 +73,15 @@ const projectReducer = (state, action) => {
       return { ...state, currentProject: payload };
 
     case SET_HEART:
-      // const isHeartOn = currentProject.heart.includes(payload);
-
-      // if (isHeartOn) return { ...state };
-      // else
       return {
         ...state,
         currentProject: {
           ...currentProject,
-          heart: [...currentProject.heart, payload],
+          heart: payload,
         },
       };
 
     case SET_SAVE:
-      // const isSaveOn = currentProject.save.includes(payload);
-
-      // if (isSaveOn) return { ...state };
-      // else
       return {
         ...state,
         currentProject: {
