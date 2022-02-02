@@ -517,11 +517,13 @@ code {
   border-radius: 50%;
 }
 
-.projectDetail-btn__heart.active {
+.projectDetail-btn__heart.active,
+.projectDetail-btn__save.active {
   background-color: green;
 }
 
-.projectDetail-btn__heart.deactive {
+.projectDetail-btn__heart.deactive,
+.projectDetail-btn__save.deactive {
   background-color: grey;
 }
 

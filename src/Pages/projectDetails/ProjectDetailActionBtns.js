@@ -39,7 +39,6 @@ const ProjectDetailActionBtns = () => {
           setHeartToggle(true);
         }
       } else if (heartToggle) {
-        console.log("true!!!!");
         const projectRef = doc(database, "posts", postId);
         await updateDoc(projectRef, {
           heart: arrayUnion(user.uid),
@@ -67,6 +66,45 @@ const ProjectDetailActionBtns = () => {
     fetchData();
   }, [heartToggle]);
 
+  useEffect(() => {
+    let project;
+
+    const fetchData = async () => {
+      if (saveToggle === undefined) {
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        project = snapShot.data();
+        setSaveList(project.save);
+        if (project.save.includes(user.uid)) {
+          setSaveToggle(true);
+        }
+      } else if (saveToggle) {
+        const projectRef = doc(database, "posts", postId);
+        await updateDoc(projectRef, {
+          save: arrayUnion(user.uid),
+        });
+
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        const project = snapShot.data();
+
+        setSaveList(project.heart);
+        setSaveList(project.save);
+      } else if (!saveToggle) {
+        const projectRef = doc(database, "posts", postId);
+        await updateDoc(projectRef, {
+          save: arrayRemove(user.uid),
+        });
+
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        const project = snapShot.data();
+
+        setSaveList(project.heart);
+        setSaveList(project.save);
+      }
+    };
+
+    fetchData();
+  }, [saveToggle]);
+
   const heartClickHandler = async () => {
     if (!user) {
       alert("Please log in");
@@ -78,32 +116,13 @@ const ProjectDetailActionBtns = () => {
   const bookmarkClickHandler = async () => {
     if (!user) {
       alert("Please log in");
-    }
-
-    setSaveToggle(!saveToggle);
-    if (saveToggle) {
-      // save the userUid to heart property
-      // in the current projenct document.
-      const projectRef = doc(database, "posts", postId);
-      await updateDoc(projectRef, {
-        save: arrayUnion(user.uid),
-      });
-
-      const alreadySave = currentProject.save.find(
-        (saveId) => saveId === user.uid
-      );
-
-      if (alreadySave) return;
-      else {
-        setSave(user.uid);
-      }
+    } else {
+      setSaveToggle(!saveToggle);
     }
   };
 
   return (
     <div className="projectDetail-actionBtns">
-      {console.log("heartToggle", heartToggle)}
-      {console.log("heart", heartList)}
       <div className="projectDetail-btn ">
         <div
           className={`projectDetail-btn__heart ${
@@ -117,7 +136,12 @@ const ProjectDetailActionBtns = () => {
         <span className="btn-counter">{heartList.length}</span>
       </div>
       <div className="projectDetail-btn">
-        <div className="projectDetail-btn__save" onClick={bookmarkClickHandler}>
+        <div
+          className={`projectDetail-btn__save ${
+            saveToggle ? "active" : "deactive"
+          }`}
+          onClick={bookmarkClickHandler}
+        >
           <FontAwesomeIcon icon={faBookmark} size="lg" />
         </div>
         {currentProject.save && (
@@ -129,31 +153,3 @@ const ProjectDetailActionBtns = () => {
 };
 
 export default ProjectDetailActionBtns;
-
-// if (!prevState === true) {
-//   console.log("true!!!!");
-//   const projectRef = doc(database, "posts", postId);
-//   await updateDoc(projectRef, {
-//     heart: arrayUnion(user.uid),
-//   });
-//   const snapShot = await getDoc(doc(database, "posts", postId));
-//   const project = snapShot.data();
-
-//   setHeartList(project.heart);
-//   setSaveList(project.save);
-
-//   return !prevState;
-// } else if (!prevState === false) {
-//   console.log("false!!!");
-//   const projectRef = doc(database, "posts", postId);
-//   await updateDoc(projectRef, {
-//     heart: arrayRemove(user.uid),
-//   });
-//   const snapShot = await getDoc(doc(database, "posts", postId));
-//   const project = snapShot.data();
-
-//   setHeartList(project.heart);
-//   setSaveList(project.save);
-
-//   return !prevState;
-// }
