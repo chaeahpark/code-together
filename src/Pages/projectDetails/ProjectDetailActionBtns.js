@@ -31,58 +31,48 @@ const ProjectDetailActionBtns = () => {
     let project;
 
     const fetchData = async () => {
-      const snapShot = await getDoc(doc(database, "posts", postId));
-      project = snapShot.data();
+      if (heartToggle === undefined) {
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        project = snapShot.data();
+        setHeartList(project.heart);
+        if (project.heart.includes(user.uid)) {
+          setHeartToggle(true);
+        }
+      } else if (heartToggle) {
+        console.log("true!!!!");
+        const projectRef = doc(database, "posts", postId);
+        await updateDoc(projectRef, {
+          heart: arrayUnion(user.uid),
+        });
 
-      setHeartList(project.heart);
-      setSaveList(project.save);
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        const project = snapShot.data();
 
-      if (project.heart.includes(user.uid)) {
-        setHeartToggle(true);
-      }
+        setHeartList(project.heart);
+        setSaveList(project.save);
+      } else if (!heartToggle) {
+        const projectRef = doc(database, "posts", postId);
+        await updateDoc(projectRef, {
+          heart: arrayRemove(user.uid),
+        });
 
-      if (project.save.includes(user.uid)) {
-        setSaveToggle(true);
+        const snapShot = await getDoc(doc(database, "posts", postId));
+        const project = snapShot.data();
+
+        setHeartList(project.heart);
+        setSaveList(project.save);
       }
     };
 
     fetchData();
-  }, []);
+  }, [heartToggle]);
 
   const heartClickHandler = async () => {
     if (!user) {
       alert("Please log in");
     } else if (user) {
       setHeartToggle(!heartToggle);
-
-      if (heartToggle === true) {
-        console.log("true!!!!");
-        const projectRef = doc(database, "posts", postId);
-        await updateDoc(projectRef, {
-          heart: arrayUnion(user.uid),
-        });
-      } else if (heartToggle === false) {
-        console.log("false!!!");
-        const projectRef = doc(database, "posts", postId);
-        await updateDoc(projectRef, {
-          heart: arrayRemove(user.uid),
-        });
-      }
     }
-
-    const snapShot = await getDoc(doc(database, "posts", postId));
-    const project = snapShot.data();
-
-    setHeartList(project.heart);
-    setSaveList(project.save);
-
-    // if (heartToggle === true) {
-    //   // save the userUid to heart property
-    //   // in the current projenct document.
-    //   const projectRef = doc(database, "posts", postId);
-    //   await updateDoc(projectRef, {
-    //     heart: arrayUnion(user.uid),
-    //   });
   };
 
   const bookmarkClickHandler = async () => {
@@ -112,6 +102,7 @@ const ProjectDetailActionBtns = () => {
 
   return (
     <div className="projectDetail-actionBtns">
+      {console.log("heartToggle", heartToggle)}
       {console.log("heart", heartList)}
       <div className="projectDetail-btn ">
         <div
@@ -138,3 +129,31 @@ const ProjectDetailActionBtns = () => {
 };
 
 export default ProjectDetailActionBtns;
+
+// if (!prevState === true) {
+//   console.log("true!!!!");
+//   const projectRef = doc(database, "posts", postId);
+//   await updateDoc(projectRef, {
+//     heart: arrayUnion(user.uid),
+//   });
+//   const snapShot = await getDoc(doc(database, "posts", postId));
+//   const project = snapShot.data();
+
+//   setHeartList(project.heart);
+//   setSaveList(project.save);
+
+//   return !prevState;
+// } else if (!prevState === false) {
+//   console.log("false!!!");
+//   const projectRef = doc(database, "posts", postId);
+//   await updateDoc(projectRef, {
+//     heart: arrayRemove(user.uid),
+//   });
+//   const snapShot = await getDoc(doc(database, "posts", postId));
+//   const project = snapShot.data();
+
+//   setHeartList(project.heart);
+//   setSaveList(project.save);
+
+//   return !prevState;
+// }
