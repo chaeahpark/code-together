@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
-import { useProjects } from "../../contexts/ProjectContext";
 import { useAuth } from "../../contexts/AuthContext";
 
 import {
@@ -13,12 +12,10 @@ import {
   arrayUnion,
   arrayRemove,
   getDoc,
-  collection,
 } from "firebase/firestore";
 import database from "../../api/postApi";
 
 const ProjectDetailActionBtns = () => {
-  const { currentProject, setHeart, setSave } = useProjects();
   const { user } = useAuth();
   const { postId } = useParams();
 
@@ -105,7 +102,7 @@ const ProjectDetailActionBtns = () => {
     fetchData();
   }, [saveToggle]);
 
-  const heartClickHandler = async () => {
+  const heartClickHandler = () => {
     if (!user) {
       alert("Please log in");
     } else if (user) {
@@ -113,7 +110,7 @@ const ProjectDetailActionBtns = () => {
     }
   };
 
-  const bookmarkClickHandler = async () => {
+  const bookmarkClickHandler = () => {
     if (!user) {
       alert("Please log in");
     } else {
@@ -144,9 +141,7 @@ const ProjectDetailActionBtns = () => {
         >
           <FontAwesomeIcon icon={faBookmark} size="lg" />
         </div>
-        {currentProject.save && (
-          <span className="btn-counter">{saveList.length}</span>
-        )}
+        <span className="btn-counter">{saveList.length}</span>
       </div>
     </div>
   );

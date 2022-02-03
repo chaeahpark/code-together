@@ -7,8 +7,6 @@ export const SET_TITLE = "SET_TITLE";
 export const SET_CONTENT = "SET_CONTENT";
 export const SET_TAGS = "SET_TAGS";
 export const SET_CREATEDAT = "SET_CREATEDAT";
-export const SET_HEART = "SET_HEART";
-export const SET_SAVE = "SET_SAVE";
 
 // VARIABLES FOR AUTH REDUCER
 export const GET_CURRENT_USER = "GET_CURRENT_USER";

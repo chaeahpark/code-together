@@ -8,8 +8,6 @@ import {
   SET_USERID,
   SET_POSTID,
   SET_CURRENT_PROJECT,
-  SET_HEART,
-  SET_SAVE,
 } from "../reducers/types";
 import { useAuth } from "./AuthContext";
 
@@ -44,14 +42,6 @@ const ProjectProvider = ({ children }) => {
     dispatch({ type: SET_CURRENT_PROJECT, payload: project });
   };
 
-  const setHeart = (idList) => {
-    dispatch({ type: SET_HEART, payload: idList });
-  };
-
-  const setSave = (userUid) => {
-    dispatch({ type: SET_SAVE, payload: userUid });
-  };
-
   const value = {
     projectList: state.projectList,
     postTitle: state.currentProject.title,
@@ -68,8 +58,6 @@ const ProjectProvider = ({ children }) => {
     setTags,
     setPostId,
     setCurrentProject,
-    setHeart,
-    setSave,
   };
 
   return (

@@ -72,24 +72,6 @@ const projectReducer = (state, action) => {
     case SET_CURRENT_PROJECT:
       return { ...state, currentProject: payload };
 
-    case SET_HEART:
-      return {
-        ...state,
-        currentProject: {
-          ...currentProject,
-          heart: [...payload],
-        },
-      };
-
-    case SET_SAVE:
-      return {
-        ...state,
-        currentProject: {
-          ...currentProject,
-          save: [...currentProject.save, payload],
-        },
-      };
-
     default:
       return state;
   }
