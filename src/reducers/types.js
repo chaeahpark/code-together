@@ -32,3 +32,7 @@ export const DISPLAY_ON = "DISPLAY_ON";
 export const DISPLAY_OFF = "DISPLAY_OFF";
 export const ADD_TAG = "ADD_TAG";
 export const DELETE_TAG = "DELETE_TAG";
+
+// VARIABLES FOR COMMENT REDUCER
+
+export const SET_COMMENTS = "SET_COMMENTS";

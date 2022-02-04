@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import { authReducer, authInitialState } from "../reducers/authReducer";
 import { auth } from "../api/authApi";
 import {
@@ -8,7 +8,6 @@ import {
   SWITCH_LOADING_STATUS,
   SET_PROFILE_IMAGE_URL,
   SET_USER_NAME,
-  LOGIN_FAIL,
 } from "../reducers/types";
 
 const AuthContext = createContext();
