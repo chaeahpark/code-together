@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import uuid from "react-uuid";
+import Comments from "../../components/comments/Comments";
 
 const ProjectDetails = () => {
   let { postId } = useParams();
@@ -129,6 +130,7 @@ const ProjectDetails = () => {
         <div className="projectDetail-btn projectDetail-btn__edit">
           {renderEditBtn()}
         </div>
+        <Comments />
       </div>
     </div>
   );

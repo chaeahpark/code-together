@@ -3,22 +3,36 @@ import { commentInitalState, commentReducer } from "../reducers/commentReducer";
 
 import { commentsCollection } from "../api/commentApi";
 import { getDocs } from "firebase/firestore";
-import { SET_COMMENTS } from "../reducers/types";
+import { SET_COMMENTS, SET_ROOTCOMMENTS } from "../reducers/types";
 
 const CommentContext = createContext();
 
 const CommentProvider = ({ children }) => {
   const [state, dispatch] = useReducer(commentReducer, commentInitalState);
+  const { comments } = state;
 
   const setComments = (comments) => {
     dispatch({ type: SET_COMMENTS, payload: comments });
   };
 
-  const value = {
-    setComments,
+  const setRootComments = (postId) => {
+    const rootComments = comments.filter(
+      (comment) => comment.postId === postId && comment.parentId === null
+    );
+
+    dispatch({ type: SET_ROOTCOMMENTS, payload: rootComments });
   };
 
-  return <CommentContext value={value}>{children}</CommentContext>;
+  const value = {
+    comments: state.comments,
+    rootComments: state.rootComments,
+    setComments,
+    setRootComments,
+  };
+
+  return (
+    <CommentContext.Provider value={value}>{children}</CommentContext.Provider>
+  );
 };
 
 export const useComment = () => {
