@@ -5,14 +5,12 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
 import { useComment } from "../../contexts/CommentContext";
-import { useAuth } from "../../contexts/AuthContext";
 
 import { commentsCollection } from "../../api/commentApi";
 import { getDocs } from "firebase/firestore";
 
 const Comments = () => {
   const { comments, setComments, setRootComments, rootComments } = useComment();
-  const { user } = useAuth();
   const { postId } = useParams();
 
   useEffect(() => {
@@ -21,22 +19,28 @@ const Comments = () => {
     const fetchData = async () => {
       const dataSnapshot = await getDocs(commentsCollection);
       dataSnapshot.forEach((doc) => {
-        comments.push(doc.data());
+        let comment = doc.data();
+        comment.commentId = doc.id;
+        comments.push(comment);
       });
-
       setComments(comments);
       setRootComments(postId);
-      console.log("root", rootComments);
     };
 
     fetchData();
-  }, []);
+  }, [rootComments]);
 
   return (
     <div className="comments-container">
       <div className="comments-wrapper">
         <h3 className="comments-title">Discussion ({comments.length})</h3>
-        <div className="comments"></div>
+        <div className="comments">
+          {rootComments.map((rootComment) => {
+            return (
+              <Comment key={rootComment.commentId} comment={rootComment} />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

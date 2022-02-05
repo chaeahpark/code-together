@@ -34,6 +34,6 @@ export const ADD_TAG = "ADD_TAG";
 export const DELETE_TAG = "DELETE_TAG";
 
 // VARIABLES FOR COMMENT REDUCER
-
 export const SET_COMMENTS = "SET_COMMENTS";
 export const SET_ROOTCOMMENTS = "SET_ROOTCOMMENTS";
+export const SET_REPLIES = "SET_REPLIES";

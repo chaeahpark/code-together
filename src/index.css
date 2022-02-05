@@ -426,7 +426,7 @@ code {
 .projectDetail-container {
   background-color: var(--bg-color);
   width: 100vw;
-  height: 90vh;
+  height: auto;
   display: flex;
   justify-content: center;
 }
@@ -435,6 +435,7 @@ code {
   width: 80vw;
   height: auto;
   padding: 0 20px;
+  padding-bottom: 20px;
   margin: 20px auto;
 
   display: flex;
@@ -586,6 +587,24 @@ code {
   flex-direction: column;
   justify-content: center;
   gap: 20px;
+}
+
+/* PROJECT DETAIL COMMENTS */
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.comment-right {
+  margin-left: 10px;
+}
+
+.comment-meta {
+  display: flex;
+  flex-direction: row;
+  font-size: small;
 }
 
 /* test */
