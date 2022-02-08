@@ -24,9 +24,9 @@ const CommentProvider = ({ children }) => {
   };
 
   const setReplies = (rootCommentId) => {
-    let replies = comments.filter((comment) => {
-      return comment.parentId === rootCommentId;
-    });
+    let replies = comments.filter(
+      (comment) => comment.parentId === rootCommentId
+    );
     //! Add sort function to diplay in line with time direction.
     dispatch({ type: SET_REPLIES, payload: replies });
   };

@@ -1,16 +1,13 @@
-import { useEffect } from "react";
 import Avatar from "react-avatar";
 
 import { useAuth } from "../../contexts/AuthContext";
-import { useComment } from "../../contexts/CommentContext";
-import { commentInitalState } from "../../reducers/commentReducer";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, replies }) => {
   const { user } = useAuth();
-  const { rootComments } = useComment();
 
   return (
     <div className="comment">
+      {console.log(replies)}
       <div className="comment-image-container">
         <Avatar name={user.displayName.slice(0, 1)} size="50" round={true} />
       </div>
@@ -20,6 +17,13 @@ const Comment = ({ comment }) => {
           <div className="comment-createdAt">31 Jan 2021</div>
         </div>
         <div className="comment-content">{comment.body}</div>
+        {replies.length > 0 && (
+          <div className="replies">
+            {replies.map((reply) => (
+              <Comment comment={reply} key={reply.commentId} replies={[]} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
