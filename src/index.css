@@ -592,8 +592,11 @@ code {
 /* PROJECT DETAIL COMMENTS */
 .comment {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -605,6 +608,26 @@ code {
   display: flex;
   flex-direction: row;
   font-size: small;
+}
+
+.comment-action {
+  font-size: small;
+  margin-right: 8px;
+}
+
+.comment-action:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.replies {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* test */
