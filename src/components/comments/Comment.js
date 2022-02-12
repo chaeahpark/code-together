@@ -10,6 +10,7 @@ const Comment = ({
   activeComment,
   setActiveComment,
   addComment,
+  updateComment,
   parentId = null,
 }) => {
   const { user } = useAuth();
@@ -38,7 +39,18 @@ const Comment = ({
           {/*! EDIT the date format */}
           <div className="comment-createdAt">13 Jan 2021</div>
         </div>
-        <div className="comment-content">{comment.body}</div>
+        {!isEditing && <div className="comment-content">{comment.body}</div>}
+        {isEditing && (
+          <CommentForm
+            submitLabel="update"
+            hasCancelButton
+            initialText={comment.body}
+            handleSubmit={(text) => {
+              updateComment(text, comment.id);
+            }}
+            handleCancel={() => setActiveComment(null)}
+          />
+        )}
         <div className="comment actions">
           {canReply && (
             <div
@@ -92,6 +104,7 @@ const Comment = ({
                 addComment={addComment}
                 setActiveComment={setActiveComment}
                 activeComment={activeComment}
+                updateComment={updateComment}
               />
             ))}
           </div>

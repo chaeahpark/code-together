@@ -7,7 +7,7 @@ import CommentForm from "./CommentForm";
 import { useComment } from "../../contexts/CommentContext";
 import { useAuth } from "../../contexts/AuthContext";
 import { commentsCollection } from "../../api/commentApi";
-import { getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { getDocs, addDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import database from "../../api/postApi";
 
 const Comments = () => {
@@ -61,6 +61,7 @@ const Comments = () => {
       });
 
       setComments(comments);
+      setActiveComment(null);
     } catch (e) {
       throw Error(e);
     }
@@ -88,6 +89,29 @@ const Comments = () => {
     }
   };
 
+  const updateComment = async (text, commentId) => {
+    try {
+      const commentDocRef = doc(database, "comments", commentId);
+      console.log("ref", commentDocRef);
+      await updateDoc(commentDocRef, {
+        body: text,
+      });
+
+      let comments = [];
+
+      const dataSnapshot = await getDocs(commentsCollection);
+      dataSnapshot.forEach((doc) => {
+        let comment = doc.data();
+        comment.commentId = doc.id;
+        comments.push(comment);
+      });
+
+      setComments(comments);
+    } catch (e) {
+      throw Error(e);
+    }
+  };
+
   return (
     <div className="comments-container">
       <div className="comments-wrapper">
@@ -110,6 +134,7 @@ const Comments = () => {
                   activeComment={activeComment}
                   setActiveComment={setActiveComment}
                   addComment={addComment}
+                  updateComment={updateComment}
                 />
               );
             })}
