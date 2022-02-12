@@ -4,7 +4,7 @@ const CommentForm = ({ submitLabel, handleSubmit }) => {
   const [text, setText] = useState("");
   const isTextareaDisabled = text.length === 0;
 
-  const handleFormSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     handleSubmit(text);
     setText("");
@@ -15,7 +15,7 @@ const CommentForm = ({ submitLabel, handleSubmit }) => {
   };
 
   return (
-    <form onSubmit={(e) => handleFormSubmit(e)}>
+    <form onSubmit={(e) => onSubmit(e)}>
       <textarea
         className="comment-form-textarea"
         value={text}

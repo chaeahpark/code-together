@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Comment from "./Comment";
@@ -7,10 +7,13 @@ import CommentForm from "./CommentForm";
 import { useComment } from "../../contexts/CommentContext";
 import { useAuth } from "../../contexts/AuthContext";
 import { commentsCollection } from "../../api/commentApi";
-import { getDocs, addDoc } from "firebase/firestore";
+import { getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import database from "../../api/postApi";
 
 const Comments = () => {
   const { comments, setComments } = useComment();
+  const [activeComment, setActiveComment] = useState(null);
+
   const { user } = useAuth();
   const { postId } = useParams();
   const rootComments = comments.filter(
@@ -45,7 +48,7 @@ const Comments = () => {
         postId,
         userId: user.uid,
         userName: user.displayName,
-        parentId: null,
+        parentId: parentId ? parentId : null,
       });
 
       let comments = [];
@@ -63,12 +66,38 @@ const Comments = () => {
     }
   };
 
+  const deleteComment = async (commentId) => {
+    if (window.confirm("Are you sure that you want to remove comment?")) {
+      try {
+        const commentDocRef = doc(database, "comments", commentId);
+        await deleteDoc(commentDocRef);
+
+        let comments = [];
+
+        const dataSnapshot = await getDocs(commentsCollection);
+        dataSnapshot.forEach((doc) => {
+          let comment = doc.data();
+          comment.commentId = doc.id;
+          comments.push(comment);
+        });
+
+        setComments(comments);
+      } catch (e) {
+        throw Error(e);
+      }
+    }
+  };
+
   return (
     <div className="comments-container">
       <div className="comments-wrapper">
         <h3 className="comments-title">Discussion ({comments.length})</h3>
         <div className="comment-form-title">Write Comment</div>
-        <CommentForm submitLabel="Write" handleSubmit={addComment} />
+        <CommentForm
+          submitLabel="Write"
+          handleSubmit={addComment}
+          deleteComment={deleteComment}
+        />
         <div className="comments">
           {rootComments &&
             rootComments.map((rootComment) => {
@@ -77,6 +106,10 @@ const Comments = () => {
                   key={rootComment.commentId}
                   comment={rootComment}
                   replies={getReplies(rootComment.commentId)}
+                  deleteComment={deleteComment}
+                  activeComment={activeComment}
+                  setActiveComment={setActiveComment}
+                  addComment={addComment}
                 />
               );
             })}
