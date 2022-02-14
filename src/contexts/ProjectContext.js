@@ -59,6 +59,7 @@ const ProjectProvider = ({ children }) => {
     postSaved: state.currentProject.saved,
     postId: state.currentProject.postId,
     currentProject: state.currentProject,
+    searchingProjects: state.searchingProjects,
 
     getProjects,
     setTitle,

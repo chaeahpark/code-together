@@ -8,7 +8,8 @@ import { searchProjects } from "../../api/postApi";
 
 const Searchbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { projectList, setSearchingProjects } = useProjects();
+  const { projectList, setSearchingProjects, searchingProjects } =
+    useProjects();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
