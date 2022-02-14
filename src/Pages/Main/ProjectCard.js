@@ -13,7 +13,7 @@ import uuid from "react-uuid";
 // !to appropriate form
 
 const ProjectCard = () => {
-  const { projectList, getProjects } = useProjects();
+  const { projectList, getProjects, searchingProjects } = useProjects();
 
   useEffect(() => {
     let projects = [];

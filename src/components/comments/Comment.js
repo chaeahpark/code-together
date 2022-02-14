@@ -42,11 +42,11 @@ const Comment = ({
         {!isEditing && <div className="comment-content">{comment.body}</div>}
         {isEditing && (
           <CommentForm
-            submitLabel="update"
+            submitLabel="Update"
             hasCancelButton
             initialText={comment.body}
             handleSubmit={(text) => {
-              updateComment(text, comment.id);
+              updateComment(text, comment.commentId);
             }}
             handleCancel={() => setActiveComment(null)}
           />
@@ -105,6 +105,7 @@ const Comment = ({
                 setActiveComment={setActiveComment}
                 activeComment={activeComment}
                 updateComment={updateComment}
+                deleteComment={deleteComment}
               />
             ))}
           </div>

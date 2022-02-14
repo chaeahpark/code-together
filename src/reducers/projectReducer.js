@@ -12,6 +12,7 @@ import {
   SET_CURRENT_PROJECT,
   SET_HEART,
   SET_SAVE,
+  SET_SEARCHING_PROJECTS,
 } from "./types";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
     heart: ["123fds", "fres21"],
     createdAt: null, // how to set a timestamp?
   },
+  searchingProjects: [],
 };
 
 const projectReducer = (state, action) => {
@@ -71,6 +73,9 @@ const projectReducer = (state, action) => {
 
     case SET_CURRENT_PROJECT:
       return { ...state, currentProject: payload };
+
+    case SET_SEARCHING_PROJECTS:
+      return { ...state, searchingProjects: payload };
 
     default:
       return state;

@@ -92,7 +92,6 @@ const Comments = () => {
   const updateComment = async (text, commentId) => {
     try {
       const commentDocRef = doc(database, "comments", commentId);
-      console.log("ref", commentDocRef);
       await updateDoc(commentDocRef, {
         body: text,
       });
@@ -107,6 +106,7 @@ const Comments = () => {
       });
 
       setComments(comments);
+      setActiveComment(null);
     } catch (e) {
       throw Error(e);
     }

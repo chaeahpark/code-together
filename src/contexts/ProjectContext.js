@@ -8,6 +8,7 @@ import {
   SET_USERID,
   SET_POSTID,
   SET_CURRENT_PROJECT,
+  SET_SEARCHING_PROJECTS,
 } from "../reducers/types";
 import { useAuth } from "./AuthContext";
 
@@ -42,6 +43,13 @@ const ProjectProvider = ({ children }) => {
     dispatch({ type: SET_CURRENT_PROJECT, payload: project });
   };
 
+  const setSearchingProjects = (searchTerm) => {
+    const searchingProject = state.projectList.filter((project) =>
+      project.content.includes(searchTerm)
+    );
+    dispatch({ type: SET_SEARCHING_PROJECTS, payload: searchingProject });
+  };
+
   const value = {
     projectList: state.projectList,
     postTitle: state.currentProject.title,
@@ -58,6 +66,7 @@ const ProjectProvider = ({ children }) => {
     setTags,
     setPostId,
     setCurrentProject,
+    setSearchingProjects,
   };
 
   return (
